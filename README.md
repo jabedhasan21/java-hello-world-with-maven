@@ -71,7 +71,7 @@ Now that you have a project that is ready to be built with Maven, the next step 
     xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
     <modelVersion>4.0.0</modelVersion>
     <groupId>org.springframework</groupId>
-    <artifactId>hello-world-maven</artifactId>
+    <artifactId>jb-hello-world-maven</artifactId>
     <packaging>jar</packaging>
     <version>0.1.0</version>
 
@@ -247,4 +247,4 @@ Here’s the completed `pom.xml` file:
 
 ### Run project
 ---
-**java -cp target/hello-world-maven-0.1.0.jar hello.HelloWorld**
+**java -cp target/jb-hello-world-maven-0.1.0.jar hello.HelloWorld**
