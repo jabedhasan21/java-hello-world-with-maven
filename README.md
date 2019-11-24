@@ -25,12 +25,12 @@ First you’ll need to setup a Java project for Maven to build. To keep the focu
 
 + on Windows you can create this directory manually.
 
-```
-└── src
-    └── main
-        └── java
-            └── hello
-```
+    ```
+    └── src
+        └── main
+            └── java
+                └── hello
+    ```
 + Within the `src/main/java/hello` directory, you can create any Java classes you want. To maintain consistency with the rest of this guide, create these two classes: `HelloWorld.java` and `Greeter.java`.
 
 + `src/main/java/hello/HelloWorld.java`
@@ -41,17 +41,18 @@ First you’ll need to setup a Java project for Maven to build. To keep the focu
           Greeter greeter = new Greeter();
           System.out.println(greeter.sayHello());
       }
-  }```
-
- + `src/main/java/hello/Greeter.java`
- ```
-  package hello;
-  public class Greeter {
-    public String sayHello() {
-        return "Hello world!";
-    }
   }
   ```
+
+ + `src/main/java/hello/Greeter.java`
+    ```
+    package hello;
+    public class Greeter {
+        public String sayHello() {
+            return "Hello world!";
+        }
+    }
+    ```
 
 Now that you have a project that is ready to be built with Maven, the next step is to build this project with Maven.
 
@@ -246,4 +247,6 @@ Here’s the completed `pom.xml` file:
 
 ### Run project
 ---
-**java -cp target/jb-hello-world-maven-0.1.0.jar hello.HelloWorld**
++ To run this project run the following command.
+
+    `java -cp target/jb-hello-world-maven-0.1.0.jar hello.HelloWorld`
