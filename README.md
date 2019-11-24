@@ -10,9 +10,9 @@ You’ll create an application that provides the time of day and then build it w
 + Install Maven
 
 ## Install Maven.
-+ [Install Maven on Windows](http://www.mkyong.com/maven/how-to-install-maven-in-windows/)
-+ [Install Maven on Ubuntu](http://www.mkyong.com/maven/how-to-install-maven-in-ubuntu/)
-+ [Install Maven on Mac OSX](http://www.mkyong.com/maven/install-maven-on-mac-osx/)
++ [Install Maven on Windows](https://www.baeldung.com/install-maven-on-windows-linux-mac#installing-maven-on-windows)
++ [Install Maven on Linux](https://www.baeldung.com/install-maven-on-windows-linux-mac#installing-maven-on-linux)
++ [Install Maven on Mac OSX](https://www.baeldung.com/install-maven-on-windows-linux-mac#installing-maven-on-mac-os-x)
 
 ## Set up the project
 First you’ll need to setup a Java project for Maven to build. To keep the focus on Maven, make the project as simple as possible for now.
@@ -41,11 +41,10 @@ First you’ll need to setup a Java project for Maven to build. To keep the focu
           Greeter greeter = new Greeter();
           System.out.println(greeter.sayHello());
       }
-  }
- ```
-+ `src/main/java/hello/Greeter.java`
+  }```
 
-  ```
+ + `src/main/java/hello/Greeter.java`
+ ```
   package hello;
   public class Greeter {
     public String sayHello() {
