@@ -1,4 +1,3 @@
 /target
 dependency-reduced-pom.xml
-test1.txt
-test2.txt
+*.txt
