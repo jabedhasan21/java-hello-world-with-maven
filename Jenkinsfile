@@ -47,7 +47,10 @@ spec:
                      sonar-scanner \
                     -Dsonar.projectKey="myandroid" \
                     -Dsonar.sources=. \
-                    -Dsonar.branch.name=$BRANCH_NAME
+                    -Dsonar.branch.name=$BRANCH_NAME \
+                    -Dsonar.sources=src/main/java/ \
+                    -Dsonar.language=java \
+                    -Dsonar.java.binaries=./target/classes  
                     '''
                     }
                     }
