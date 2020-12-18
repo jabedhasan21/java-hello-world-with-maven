@@ -4,7 +4,7 @@
     <modelVersion>4.0.0</modelVersion>
     <groupId>org.springframework</groupId>
     <artifactId>test</artifactId>
-    <packaging>war</packaging>
+    <packaging>ear</packaging>
     <version>1.0</version>
 
     <!-- tag::joda[] -->
