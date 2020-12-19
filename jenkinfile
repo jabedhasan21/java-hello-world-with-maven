@@ -3,24 +3,85 @@ pipeline
 	 agent
 	    { label "linux_slave"
 	 }
+	 	parameters
+	{     
+		choice(
+			name: 'Environment',
+			choices: "SIT",
+			description: 'Select the Deployment Environment' )
+		booleanParam(
+			name: 'TOGGLE', 
+			defaultValue: true, 
+			description: 'Toggle this value')
+    }
+	environment 
+	{ 
+           projectArtifactId = 'ArtifactId'
+    	   projectGroupId = 'GroupId'
+    	   projectVersion = 'Version'
+     	   artifactType = 'Packaging'
+           app_git_url = 'galaxy_cls_sit_git_url'
+           app_git_branch = 'galaxy_cls_sit_git_branch'
+           nexus_url = 'galaxy_nexus_url'
+           nexus_repo = 'galaxy_cls_sit_nexus_repo'
+           EMAIL = 'email'
+	}
 stages
    {
-      stage('git clone')
+    stage('git clone')
 	  {
 	   steps
 	     {
 		   cleanWs()
 		   dir('config')
 		    {
-			 
 			 git branch:'master', credentialsId: '7d05c5ea-50a1-43dc-82f1-139fa9c86bb1', url: 'https://github.com/Raj-Release/java-hello-world-with-maven.git'
 			 echo 'checkout completed' 
+			script
+			{  
+			 def props = readJSON file: "${env.WORKSPACE}/config/devops.json"
+			 app_git_url=props["${params.Environment}"]['galaxy_cls_git_url']
+			 app_git_branch = props["${params.Environment}"]['galaxy_cls_git_branch']
+			 echo "${app_git_url}"
+             echo "${app_git_branch}"
+				
+			 }
+			 
 		   }
 		 
 	   }
 	   
 	  }
+	  stage('Checkout APP files')
+    	{
+			steps
+			{
+            	git branch: app_git_branch, credentialsId: '9e72922c-502a-4257-b092-8184f7ef5d1c', url: app_git_url
+				echo 'checkout completed'
+                script
+				{
+					pom = readMavenPom file: "pom.xml"
+                    projectArtifactId = pom.getArtifactId()
+					projectGroupId = pom.getGroupId()
+					projectVersion = pom.getVersion()
+					artifactType = pom.getPackaging()
+                }
+            }
+        }
+    	stage("Build and Package")
+		{
+			steps
+			{
+				echo "${projectArtifactId}"
+				sh "mvn clean install"
+ 		    }
+       	}
+
 }
+
 }
 
 
+
+
+        
