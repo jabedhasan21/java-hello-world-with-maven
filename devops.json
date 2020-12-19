@@ -1,6 +1,7 @@
 {
  "SIT":
       {
-      "app_url":"app_git_url"
+       "galaxy_cls_git_url": "https://bitbucket.starhealth.in/scm/test/test-repository.git",
+      	"galaxy_cls_git_branch": "master",
       }
 }
