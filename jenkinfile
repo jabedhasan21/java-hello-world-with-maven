@@ -22,7 +22,7 @@ stages
 			 echo 'checkout completed' 
 			 script 
 			  {
-			   def props = readJSON file: "${env.WORKSPACE}/config/devops.json"
+			   def props = readJSON file: "${env.WORKSPACE}/config"
 			   }
 		   }
 		 
