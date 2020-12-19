@@ -5,13 +5,13 @@ pipeline
 	 }
 stages
    {
-   stage
-   {
-   steps
-     {
-	  cleanWs()
-   }
-}
+     stage('clean workspace')
+        {
+         steps
+             {
+	          cleanWs()
+         }
+     }
     stage('git clone')
 	  {
 	   steps
