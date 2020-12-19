@@ -9,6 +9,7 @@ stages
 	  {
 	   steps
 	     {
+		   cleanWs()
 		   dir('config')
 		    {
 			 
@@ -21,6 +22,5 @@ stages
 	  }
 }
 }
-
 
 
