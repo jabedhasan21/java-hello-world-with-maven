@@ -9,10 +9,6 @@ pipeline
 			name: 'Environment',
 			choices: "SIT",
 			description: 'Select the Deployment Environment' )
-		booleanParam(
-			name: 'TOGGLE', 
-			defaultValue: true, 
-			description: 'Toggle this value')
     }
 	environment 
 	{ 
