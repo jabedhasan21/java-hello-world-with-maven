@@ -38,7 +38,7 @@ stages
     	 {
 		steps
 			 {
-         git branch:'master', credentialsId: '9e72922c-502a-4257-b092-8184f7ef5d1c', url: 'https://github.com/Raj-Release/java-hello-world-with-maven.git'
+         git branch:'master', credentialsId: '7d05c5ea-50a1-43dc-82f1-139fa9c86bb1', url: 'https://github.com/Raj-Release/java-hello-world-with-maven.git'
 				echo 'checkout completed'
                 script
 				{
