@@ -1,7 +1,7 @@
 {
  "SIT":
       {
-       "galaxy_cls_git_url": "https://github.com/Raj-Release/Name.git",
+       "galaxy_cls_git_url": "https://github.com/Raj-Release/java-hello-world-with-maven.git",
       	"galaxy_cls_git_branch": "master",
       }
 }
