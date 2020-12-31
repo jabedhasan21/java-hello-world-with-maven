@@ -34,23 +34,7 @@ stages
 	   }
 	   
 	  }
-	  stage('Checkout APP files')
-    	 {
-		steps
-			 {
-         git branch:'master', credentialsId: '7d05c5ea-50a1-43dc-82f1-139fa9c86bb1', url: 'https://github.com/Raj-Release/java-hello-world-with-maven.git'
-				echo 'checkout completed'
-                script
-				{
-					pom = readMavenPom file: "pom.xml"
-                    projectArtifactId = pom.getArtifactId()
-					projectGroupId = pom.getGroupId()
-					projectVersion = pom.getVersion()
-					artifactType = pom.getPackaging()
-                }
-            }
-        }
-    	stage("Build and Package")
+	      	stage("Build and Package")
 		{
 			steps
 			{
