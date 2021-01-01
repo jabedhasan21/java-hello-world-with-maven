@@ -1,0 +1,49 @@
+pipeline
+       {
+	    agent
+	     { label "slave"
+	    }
+	    parameters
+	         {     
+		choice(
+			name: 'Environment',
+			choices: "SIT",
+			description: 'Select the Deployment Environment' )
+        }
+	    environment 
+	              { 
+           projectArtifactId = 'ArtifactId'
+    	   projectGroupId = 'GroupId'
+    	   projectVersion = 'Version'
+     	   artifactType = 'Packaging'
+           app_git_url = 'galaxy_cls_sit_git_url'
+           app_git_branch = 'galaxy_cls_sit_git_branch'
+	    }
+stages
+     {
+    stage('git clone')
+	    {
+	     steps
+	         {
+		     	 git branch:'master', credentialsId: '7d05c5ea-50a1-43dc-82f1-139fa9c86bb1', url: 'https://github.com/Raj-Release/java-hello-world-with-maven.git'
+			 echo 'checkout completed' 
+			}		 
+	   }
+	      	stage("Build and Package")
+		{
+			steps
+			{
+				sh "mvn clean install"
+ 		    }
+       	}
+
+}
+
+}
+
+
+
+
+
+
+        
