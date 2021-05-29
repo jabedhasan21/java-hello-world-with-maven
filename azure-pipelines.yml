@@ -15,6 +15,11 @@ steps:
   inputs:
     mavenPomFile: 'pom.xml'
     goals: 'package'
+- task: Maven@4
+  inputs:
+    mavenPomFile: 'pom.xml'
+    goals: 'deploy'
+    
 - task: Bash@3
   inputs:
     targetType: 'inline'
