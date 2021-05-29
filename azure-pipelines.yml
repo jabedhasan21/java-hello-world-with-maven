@@ -15,7 +15,7 @@ steps:
   inputs:
     mavenPomFile: 'pom.xml'
     goals: 'package'
-- task: Maven-deploy
+- task: Maven@3
   inputs:
     mavenPomFile: 'pom.xml'
     goals: 'deploy'
