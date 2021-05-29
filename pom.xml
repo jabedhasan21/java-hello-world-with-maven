@@ -6,6 +6,17 @@
     <artifactId>jb-hello-world-maven</artifactId>
     <packaging>jar</packaging>
     <version>0.1.0</version>
+    
+    <repository>
+  <id>local</id>
+  <url>https://pkgs.dev.azure.com/kumarnitinsingh04/first-azure-devops-build-pipe/_packaging/local/maven/v1</url>
+  <releases>
+    <enabled>true</enabled>
+  </releases>
+  <snapshots>
+    <enabled>true</enabled>
+  </snapshots>
+</repository>
 
     <!-- tag::joda[] -->
      <properties>
