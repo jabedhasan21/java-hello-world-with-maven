@@ -3,9 +3,9 @@
     xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
     <modelVersion>4.0.0</modelVersion>
     <groupId>org.springframework</groupId>
-    <artifactId>This package belongs to Mr king</artifactId>
+    <artifactId>jb-hello-world-maven</artifactId>
     <packaging>jar</packaging>
-    <version>9</version>
+    <version>0.1.0</version>
 
     <!-- tag::joda[] -->
      <properties>
