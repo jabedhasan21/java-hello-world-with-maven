@@ -31,9 +31,8 @@ jobs:
       - run: |
               cd ${{ runner.temp }}
               ls
-              echo " ----"
-              cd ${{ runner.temp }}/lib/
-              ls
+      - run: export JAVA_HOME=${{ runner.temp }}/IBMJDK
+         
   
  
       
