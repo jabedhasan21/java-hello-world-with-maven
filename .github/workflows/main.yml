@@ -30,7 +30,7 @@ jobs:
     # Thus, you can simply run:
       
       - name: Set Java
-        uses: actions/setup-java@master
+        uses: actions/setup-java@v2
         with:
              java-version: 8.0.6
              architecture: x64
