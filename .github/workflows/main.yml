@@ -26,7 +26,6 @@ jobs:
       
       - run: chmod a+x javaSDK.bin
       - run: echo 'USER_INSTALL_DIR=/javainstallation' > installer.properties
-      - run: echo 'USER_INSTALL_DIR=/my_directory' >> installer.properties
       - run: ./javaSDK.bin  -i silent 
  
       
