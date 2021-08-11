@@ -31,7 +31,7 @@ jobs:
 
       - run: |
          chmod a+x $RUNNER_TEMP/java_package.bin
-         ./$RUNNER_TEMP/java_package.bin
+         $RUNNER_TEMP/java_package.bin
         
 
       - name: show sdk
