@@ -32,7 +32,7 @@ jobs:
       - name: Set Java
         uses: actions/setup-java@master
         with:
-             version: 12
+             version: 8.0.6
              architecture: x64
              jdkFile: ./javaSDK.bin
         
