@@ -32,8 +32,10 @@ jobs:
       - name: show sdk
         run : ls
         
+      - name: show pwd
+        run : pwd
         
-        
+
       # Runs a single command using the runners shell
       - name: SetUp JDK IBM 
         uses: actions/setup-java@v1
