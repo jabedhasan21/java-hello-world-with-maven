@@ -26,12 +26,12 @@ jobs:
       
       - run: chmod a+x javaSDK.bin
       - run: echo 'LICENSE_ACCEPTED=TRUE' > installer.properties
+      - run: echo 'USER_INSTALL_DIR=${{ runner.temp }}/' > installer.properties
       - run: ./javaSDK.bin  -i silent 
  
       
     # Thus, you can simply run:
-      - run: cd /usr/java/
-      - run:  ls
+
       - run: java -version
         
 
