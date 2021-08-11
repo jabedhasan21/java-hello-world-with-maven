@@ -28,7 +28,7 @@ jobs:
       - name: SetUp JDK IBM 
         uses: actions/setup-java@v1
         with: 
-          java-version: 1.8
+          java-version: com.ibm.java.jdk.v8
 
       # Runs a set of commands using the runners shell
       - name: Build the maven project
