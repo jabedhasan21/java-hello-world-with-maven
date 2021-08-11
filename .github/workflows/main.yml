@@ -22,12 +22,11 @@ jobs:
     # Steps represent a sequence of tasks that will be executed as part of the job
     steps:
       # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
-      - name: First step check banch
-        uses: actions/checkout@v2
-        
-      - uses: battila7/jdk-via-jabba@v1
-        with:
-          jdk: ibm@1.8.0
+      - run: wget -O javaSDK.bin http://public.dhe.ibm.com/ibmdl/export/pub/systems/cloud/runtimes/java/8.0.6.26/linux/x86_64/ibm-java-sdk-8.0-6.26-x86_64-archive.bin
+      
+      - run: chmod a+x javaSDK.bin
+      - run: ./javaSDK.bin
+      
     # Thus, you can simply run:
       - run: java -version
         
