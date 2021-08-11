@@ -31,9 +31,11 @@ jobs:
       - run: |
               cd ${{ runner.temp }}
               ls
-      - run: export JAVA_HOME=${{ runner.temp }}/IBMJDK/jre/
+      - run: |
+              export JAVA_HOME=${{ runner.temp }}/IBMJDK/jre/
+              echo $JAVA_HOME
          
-  
+      - run:  echo $JAVA_HOME
  
       
     # Thus, you can simply run:
