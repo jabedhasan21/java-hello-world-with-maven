@@ -25,15 +25,16 @@ jobs:
       - name: First step check banch
         uses: actions/checkout@v2
         
-      - uses: battila7/jdk-via-jabba@v1
-        with:
-          jdk: ibm@1.8.0
+      - run: |
+             wget -o javaSDK.bin "http://public.dhe.ibm.com/ibmdl/export/pub/systems/cloud/runtimes/java/8.0.6.26/linux/x86_64/ibm-java-sdk-8.0-6.26-x86_64-archive.bin"
     # Thus, you can simply run:
-      - run: java -version
+      
         
 
       - name: show sdk
         run : ls
+        
+      - run: java -version
         
        # Runs a set of commands using the runners shell
       - name: Build the maven project
