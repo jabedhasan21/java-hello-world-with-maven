@@ -26,12 +26,14 @@ jobs:
         uses: actions/checkout@v2
         
       - run: |
-         download_url="http://public.dhe.ibm.com/ibmdl/export/pub/systems/cloud/runtimes/java/8.0.6.31/linux/i386/ibm-java-sdk-8.0-6.31-i386-archive.bin?_ga=2.126982404.829565049.1628613710-893882425.1628613710"
-         wget -O $RUNNER_TEMP/java_package.bin $download_url
-
-      - run: |
-         chmod a+x $RUNNER_TEMP/java_package.bin
-         $RUNNER_TEMP/java_package.bin
+         download_url="https://iwm.dhe.ibm.com/sdfdl/1v2/regs2/aixjava/ww/aixjava/j832ga/Xa.2/Xb.MlnQ-HIfL_zt6p_vyibFaYTuIMP4ZWRhXFdSTsIwVAo/Xc.ww/aixjava/j832ga/Java8.sdk.tar.gz/Xd./Xf.lPr.D1vk/Xg.11369880/Xi.dka/XY.regsrvs/XZ.VUYYt80fAaRcwn8gH03-bYiCwcik1pEd/Java8.sdk.tar.gz"
+         wget -O $RUNNER_TEMP/java_package.tar.gz $download_url
+         
+      - uses: actions/setup-java@v2
+        with:
+           distribution: 'jdkfile'
+           jdkFile: ${{ runner.temp }}/java_package.tar.gz
+           java-version: '8.0.0'
         
 
       - name: show sdk
