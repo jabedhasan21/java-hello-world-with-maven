@@ -33,6 +33,7 @@ jobs:
         uses: actions/setup-java@v2
         with:
              java-version: 8.0.6
+             distribution: 'jdkfile'
              architecture: x64
              jdkFile: ./javaSDK.bin
         
