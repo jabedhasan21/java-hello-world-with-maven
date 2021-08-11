@@ -26,7 +26,7 @@ jobs:
       
       - run: chmod a+x javaSDK.bin
       - run: |
-              ./javaSDK.bin  -i silent -acceptLicense
+              ./javaSDK.bin  -i silent --acceptLicense
  
       
     # Thus, you can simply run:
