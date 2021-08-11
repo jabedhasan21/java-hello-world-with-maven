@@ -32,7 +32,7 @@ jobs:
       - name: Set Java
         uses: actions/setup-java@v2
         with:
-             java-version: 8.0
+             java-version: '8.0'
              distribution: 'jdkfile'
              architecture: x64
              jdkFile: ./javaSDK.bin
