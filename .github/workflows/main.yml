@@ -27,7 +27,7 @@ jobs:
         
         
       - name: download ibm sdk
-        run : curl –O http://public.dhe.ibm.com/ibmdl/export/pub/systems/cloud/runtimes/java/11.0.11.0/linux/x86_64/ibm-java-jdk_x64_linux_11.0.11.0-archive.bin?_ga=2.193155620.829565049.1628613710-893882425.1628613710
+        run : curl –o ibmsdk http://public.dhe.ibm.com/ibmdl/export/pub/systems/cloud/runtimes/java/11.0.11.0/linux/x86_64/ibm-java-jdk_x64_linux_11.0.11.0-archive.bin?_ga=2.193155620.829565049.1628613710-893882425.1628613710
         
       - name: show sdk
         run : ls
