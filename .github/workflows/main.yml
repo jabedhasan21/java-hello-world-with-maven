@@ -25,8 +25,10 @@ jobs:
       - run: wget -O javaSDK.bin http://public.dhe.ibm.com/ibmdl/export/pub/systems/cloud/runtimes/java/8.0.6.26/linux/x86_64/ibm-java-sdk-8.0-6.26-x86_64-archive.bin
       
       - run: chmod a+x javaSDK.bin
-      - run: ./javaSDK.bin
-      - run: "4"
+      - run: |
+              ./javaSDK.bin
+              4
+ 
       
     # Thus, you can simply run:
       - run: java -version
