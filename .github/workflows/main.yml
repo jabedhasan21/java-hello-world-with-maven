@@ -39,7 +39,7 @@ jobs:
         uses: actions/setup-java@v1
         with: 
           java-version: 8.0
-          jdkFile: ./ibm-java-jre-8.0-6.31-ppc-archive.bin
+          jdkFile: ./Java8.sdk.8.0.0.631.tar.gz
 
       # Runs a set of commands using the runners shell
       - name: Build the maven project
