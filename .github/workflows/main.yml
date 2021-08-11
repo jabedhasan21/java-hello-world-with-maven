@@ -28,8 +28,9 @@ jobs:
       - run: echo 'LICENSE_ACCEPTED=TRUE' > installer.properties
       - run: echo 'USER_INSTALL_DIR=${{ runner.temp }}/' >> installer.properties
       - run: ./javaSDK.bin  -i silent 
-      - run: cd ${{ runner.temp }}
-      - run: ls
+      - run: |
+              cd ${{ runner.temp }}
+              ls
  
       
     # Thus, you can simply run:
