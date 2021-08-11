@@ -27,7 +27,7 @@ jobs:
         
       - uses: battila7/jdk-via-jabba@v1
         with:
-          jdk: ibm@1.7.0-10.75
+          jdk: ibm@1.8.0
     # Thus, you can simply run:
       - run: java -version
         
