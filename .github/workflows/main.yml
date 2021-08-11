@@ -30,6 +30,8 @@ jobs:
  
       
     # Thus, you can simply run:
+      - run: cd /usr/java/
+      - run: cd ls
       - run: java -version
         
 
