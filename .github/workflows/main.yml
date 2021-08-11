@@ -26,7 +26,8 @@ jobs:
       
       - run: chmod a+x javaSDK.bin
       - run: |
-              ./javaSDK.bin  -i silent -D LICENSE_ACCEPTED=TRUE
+              echo 'LICENSE_ACCEPTED=TRUE' > installer.properties
+              ./javaSDK.bin  -i silent 
  
       
     # Thus, you can simply run:
