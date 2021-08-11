@@ -26,6 +26,7 @@ jobs:
       
       - run: chmod a+x javaSDK.bin
       - run: ./javaSDK.bin
+      - run: "4"
       
     # Thus, you can simply run:
       - run: java -version
