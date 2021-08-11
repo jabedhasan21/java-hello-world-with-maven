@@ -27,7 +27,7 @@ jobs:
         
         
       - name: download ibm sdk
-        run : wget -c http://public.dhe.ibm.com/ibmdl/export/pub/systems/cloud/runtimes/java/8.0.6.31/linux/ppc/ibm-java-jre-8.0-6.31-ppc-archive.bin
+        run : wget -c https://iwm.dhe.ibm.com/sdfdl/1v2/regs2/aixjava/ww/aixjava/j832/Xa.2/Xb.MlnQ-HIfL_zt6p9WrcYAGqDwGfmMCEO96_prbs8130E/Xc.ww/aixjava/j832/Java8.sdk.8.0.0.631.tar.gz/Xd./Xf.lPr.D1vk/Xg.11369841/Xi.dka/XY.regsrvs/XZ.lpNlpzgumYleg425VmZiePJTVD_hbEVY/Java8.sdk.8.0.0.631.tar.gz
         
       - name: show sdk
         run : ls
