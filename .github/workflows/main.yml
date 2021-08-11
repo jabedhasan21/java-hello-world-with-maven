@@ -26,8 +26,7 @@ jobs:
       
       - run: chmod a+x javaSDK.bin
       - run: |
-              ./javaSDK.bin
-              4
+              ./javaSDK.bin --help
  
       
     # Thus, you can simply run:
