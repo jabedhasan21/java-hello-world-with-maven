@@ -25,15 +25,11 @@ jobs:
       - name: First step check banch
         uses: actions/checkout@v2
         
-      - run: |
-         download_url="https://iwm.dhe.ibm.com/sdfdl/1v2/regs2/aixjava/ww/aixjava/j832ga/Xa.2/Xb.MlnQ-HIfL_zt6p_vyibFaYTuIMP4ZWRhXFdSTsIwVAo/Xc.ww/aixjava/j832ga/Java8.sdk.tar.gz/Xd./Xf.lPr.D1vk/Xg.11369880/Xi.dka/XY.regsrvs/XZ.VUYYt80fAaRcwn8gH03-bYiCwcik1pEd/Java8.sdk.tar.gz"
-         wget -O $RUNNER_TEMP/java_package.tar.gz $download_url
-         
-      - uses: actions/setup-java@v2
+      - uses: battila7/jdk-via-jabba@v1
         with:
-           distribution: 'jdkfile'
-           jdkFile: ${{ runner.temp }}/java_package.tar.gz
-           java-version: '8.0.0'
+          jdk: ibm@8.0.0
+    # Thus, you can simply run:
+      - run: java -version
         
 
       - name: show sdk
