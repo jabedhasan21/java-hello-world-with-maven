@@ -22,8 +22,13 @@ jobs:
     # Steps represent a sequence of tasks that will be executed as part of the job
     steps:
       # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
+      - run: wget -O javaSDK.bin http://public.dhe.ibm.com/ibmdl/export/pub/systems/cloud/runtimes/java/8.0.6.26/linux/x86_64/ibm-java-sdk-8.0-6.26-x86_64-archive.bin
+      - run: chmod a+x javaSDK.bin
+      - run: echo 'LICENSE_ACCEPTED=TRUE' > installer.properties
+      - run: echo 'USER_INSTALL_DIR=${{ runner.temp }}/IBMJDK' >> installer.properties
+      - run: ./javaSDK.bin  -i silent 
       - run: echo  $JAVA_HOME
-      - run: JAVA_HOME=/path/to/jdk17/ mvn -B package pom.xml
+      - run: JAVA_HOME=${{ runner.temp }}/IBMJDK/ mvn -B package pom.xml
       - run: echo  $JAVA_HOME
       
 
