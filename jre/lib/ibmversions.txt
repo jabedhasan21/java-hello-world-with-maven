@@ -1,0 +1,12 @@
+# default installation directories for IBM SDKs
+8.0=/opt/ibm/java-i386-80
+1.8.0=/opt/ibm/java-i386-80
+7.1=/opt/ibm/java-i386-71
+1.7.1=/opt/ibm/java-i386-71
+7.0=/opt/ibm/java-i386-70
+1.7.0=/opt/ibm/java-i386-70
+6.0=/opt/ibm/java-i386-60
+1.6.0=/opt/ibm/java-i386-60
+5.0=/opt/ibm/java2-i386-50
+1.5.0=/opt/ibm/java2-i386-50
+1.4.2=/opt/IBMJava2-142
