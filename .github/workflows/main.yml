@@ -24,15 +24,9 @@ jobs:
         - name: Checkout repository
           uses: actions/checkout@v2.3.3
       # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
-        - run: wget -O javaSDK.bin http://public.dhe.ibm.com/ibmdl/export/pub/systems/cloud/runtimes/java/8.0.6.26/linux/x86_64/ibm-java-sdk-8.0-6.26-x86_64-archive.bin
-        - run: chmod a+x javaSDK.bin
-        - run: echo 'LICENSE_ACCEPTED=TRUE' > installer.properties
-        - run: echo 'USER_INSTALL_DIR=${{ runner.temp }}/IBMJDK' >> installer.properties
-        - run: ./javaSDK.bin  -i silent 
-        - run: echo  $JAVA_HOME
-        - run: |
-              echo $JAVA_HOME
-              JAVA_HOME="${{ runner.temp }}/IBMJDK/jre" mvn -v
-              mvn -B package -f pom.xml
+        - uses: actions/setup-java@v2
+          with:
+             distribution: 'temurin' # See 'Supported distributions' for available options
+             java-version: '8'
         - run: echo  $JAVA_HOME
       
