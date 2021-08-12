@@ -23,6 +23,9 @@ jobs:
     steps:
       # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
       - run: echo  $JAVA_HOME
+      - run: echo "::set-env JAVA_HOME=FOO::BAR"
+      - run: echo  $JAVA_HOME
+      
 
       
       
