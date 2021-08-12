@@ -23,7 +23,7 @@ jobs:
     steps:
       # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
       - run: echo  $JAVA_HOME
-      - run: echo "::set-env JAVA_HOME=FOO::"
+      - run: JAVA_HOME=/path/to/jdk17/ mvn -B package pom.xml
       - run: echo  $JAVA_HOME
       
 
