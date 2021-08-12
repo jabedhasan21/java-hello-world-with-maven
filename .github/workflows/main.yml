@@ -26,9 +26,9 @@ jobs:
       # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
         - run: ls
         - run: |
-              JAVA_HOME=/jre
+              JAVA_HOME=/jre mvn -v
               echo  $JAVA_HOME
-              mvn -v
+              
               
   
 
