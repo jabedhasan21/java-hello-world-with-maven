@@ -28,7 +28,7 @@ jobs:
         - run: |
               echo $JAVA_HOME
               mvn -v
-              JAVA_HOME="jre/" mvn -v
+              JAVA_HOME=/jre mvn -v
               mvn -B package -f pom.xml
         - run: echo  $JAVA_HOME
         - run: ls -a 
