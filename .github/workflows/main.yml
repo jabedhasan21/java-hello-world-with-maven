@@ -28,7 +28,7 @@ jobs:
       - run: echo 'USER_INSTALL_DIR=${{ runner.temp }}/IBMJDK' >> installer.properties
       - run: ./javaSDK.bin  -i silent 
       - run: echo  $JAVA_HOME
-      - run: JAVA_HOME=${{ runner.temp }}/IBMJDK/ mvn -B package pom.xml
+      - run: JAVA_HOME=${{ runner.temp }}/IBMJDK/ mvn -B package --file pom.xml
       - run: echo  $JAVA_HOME
       
 
