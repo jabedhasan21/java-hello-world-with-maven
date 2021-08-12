@@ -23,6 +23,8 @@ jobs:
     steps:
       # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
       - uses: docker://ibmjava:8-sdk-alpine
+      
       - run: echo  $JAVA_HOME
+      - run: sudo apt-get install ibm-java80-jre ibm-java80-jdk
       
       
