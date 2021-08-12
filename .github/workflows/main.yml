@@ -31,7 +31,7 @@ jobs:
       - run: |
               echo $JAVA_HOME
               JAVA_HOME="${{ runner.temp }}/IBMJDK/jre" mvn -v
-              mvn -B package --file pom.xml
+              mvn -B package -f pom.xml
       - run: echo  $JAVA_HOME
       
 
