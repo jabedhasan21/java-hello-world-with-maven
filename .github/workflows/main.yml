@@ -23,6 +23,6 @@ jobs:
     steps:
     - uses: battila7/jdk-via-jabba@v1
       with:
-          jdk: 1.8.0-6.26=ia+http://public.dhe.ibm.com/ibmdl/export/pub/systems/cloud/runtimes/java/8.0.6.26/linux/x86_64/ibm-java-sdk-8.0-6.26-x86_64-archive.bin
+          jdk: 1.8.0=http://public.dhe.ibm.com/ibmdl/export/pub/systems/cloud/runtimes/java/8.0.6.26/linux/x86_64/ibm-java-sdk-8.0-6.26-x86_64-archive.bin
 
     - run: java -version
