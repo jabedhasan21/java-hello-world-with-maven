@@ -23,5 +23,6 @@ jobs:
     steps:
       # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
       - uses: docker://ibmjava:8-sdk-alpine
+      - run: echo  $JAVA_HOME
       
       
