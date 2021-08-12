@@ -23,11 +23,11 @@ jobs:
         - name: Checkout repository
           uses: actions/checkout@v2.3.3
       # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
-        - run: echo  $JAVA_HOME
+        - run: echo  $JAVA_HOME               
         - run: |
               echo $JAVA_HOME
               mvn -v
-              JAVA_HOME="${{ github.workspace }}/jre/bin" mvn -v
+              JAVA_HOME="./jre" mvn -v
               mvn -B package -f pom.xml
         - run: echo  $JAVA_HOME
         - run: ls -a 
