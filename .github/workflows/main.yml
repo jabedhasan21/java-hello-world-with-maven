@@ -29,8 +29,8 @@ jobs:
       - run: ./javaSDK.bin  -i silent 
       - run: echo  $JAVA_HOME
       - run: |
-              JAVA_HOME=${{ runner.temp }}/IBMJDK/jre
               echo $JAVA_HOME
+              JAVA_HOME="${{ runner.temp }}/IBMJDK/jre" mvn -v
               mvn -B package --file pom.xml
       - run: echo  $JAVA_HOME
       
