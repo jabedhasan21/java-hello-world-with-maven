@@ -23,6 +23,6 @@ jobs:
     steps:
     - uses: battila7/jdk-via-jabba@v1
       with:
-          jdk: graalvm@20.1.0
+          jdk: 1.8.0-custom=tgz+http://example.com/distribution.tar.gz
 
     - run: java -version
