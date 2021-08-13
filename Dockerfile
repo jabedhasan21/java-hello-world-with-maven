@@ -5,5 +5,6 @@ COPY pom.xml .
 RUN mvn -f pom.xml clean package install
 WORKDIR /target
 RUN ls
-add . /root/
+run pwd
+
 
