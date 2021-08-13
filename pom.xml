@@ -49,6 +49,8 @@
             </plugin>
         </plugins>
     </build>
+    
+ <!--   
      <repositories>
 <repository>
   <id>local</id>
@@ -73,4 +75,5 @@
   </snapshots>
 </repository>
 </distributionManagement>
+-->
 </project>
