@@ -4,5 +4,6 @@ COPY src src
 COPY pom.xml .
 RUN mvn -f pom.xml clean package install
 RUN ls
+RUN ls
 COPY /target .
 
