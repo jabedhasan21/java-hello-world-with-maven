@@ -27,7 +27,8 @@ jobs:
               docker create -ti --name dummy collector bash
               docker cp dummy:/target .
               docker rm -f dummy
-        - run: ls
-        - run: cd target
-        - run: ls
+        - run: |
+                ls
+                cd target
+                ls
       
