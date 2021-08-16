@@ -20,7 +20,7 @@ jobs:
     - uses: actions/cache@v2
       id: cache-packages 
       with:
-        path: /IBMJDK
+        path: ${{ runner.temp }}/IBMJDK/
         key: ${{ runner.os }}-/IBMJDK
         restore-keys: |
           ${{ runner.os }}-/IBMJDK
@@ -35,7 +35,7 @@ jobs:
       if: steps.cache-packages.outputs.cache-hit != 'true'
       run: |
            echo 'LICENSE_ACCEPTED=TRUE' > installer.properties
-           echo 'USER_INSTALL_DIR=/IBMJDK' >> installer.properties  
+           echo 'USER_INSTALL_DIR=${{ runner.temp }}/IBMJDK' >> installer.properties  
      
     - name: Install Java
       if: steps.cache-packages.outputs.cache-hit != 'true'
@@ -48,7 +48,7 @@ jobs:
             #sudo ln -s /usr/share/apache-maven-3.6.3/bin/mvn /usr/bin/mvn
     - name: Build JAR
       run: |
-           export JAVA_HOME="/IBMJDK/jre"
+           export JAVA_HOME="${{ runner.temp }}/IBMJDK/jre"
            mvn -B package -f pom.xml
            cd target 
            ls -a
