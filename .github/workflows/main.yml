@@ -21,9 +21,9 @@ jobs:
       id: cache-packages 
       with:
         path: ${{ runner.temp }}/IBMJDK/
-        key: ${{ runner.os }}-/IBMJDK
+        key: ${{ runner.os }}-${{ runner.temp }}/IBMJDK/
         restore-keys: |
-          ${{ runner.os }}-/IBMJDK
+          ${{ runner.os }}-${{ runner.temp }}/IBMJDK/
         
     - name: Download Java
       if: steps.cache-packages.outputs.cache-hit != 'true'
