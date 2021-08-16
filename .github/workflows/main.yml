@@ -31,12 +31,15 @@ jobs:
           wget -O javaSDK.bin http://public.dhe.ibm.com/ibmdl/export/pub/systems/cloud/runtimes/java/7.0.10.85/linux/x86_64/ibm-java-sdk-7.0-10.85-x86_64-archive.bin
           chmod a+x javaSDK.bin
           
-    - name: Install Java
+    - name: Create Java Config file
       if: steps.cache-packages.outputs.cache-hit != 'true'
       run: |
            echo 'LICENSE_ACCEPTED=TRUE' > installer.properties
-           echo 'USER_INSTALL_DIR=/IBMJDK' >> installer.properties
-           ./javaSDK.bin  -i silent 
+           echo 'USER_INSTALL_DIR=/IBMJDK' >> installer.properties  
+     
+    - name: Install Java
+      if: steps.cache-packages.outputs.cache-hit != 'true'
+      run: ./javaSDK.bin  -i silent 
     #- name: Download Maven
       #run: |
             #curl -sL https://www-eu.apache.org/dist/maven/maven-3/3.6.3/binaries/apache-maven-3.6.3-bin.zip -o maven.zip
