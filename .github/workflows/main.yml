@@ -16,13 +16,15 @@ jobs:
     # Steps represent a sequence of tasks that will be executed as part of the job
     steps:
     - uses: actions/checkout@v2
-    - name: Cache Primes
-      id: cache-primes
-      uses: actions/cache@v2
+    - uses: actions/cache@v2
+      id: cache-packages  # give it a name for checking the cache hit-or-not
       with:
-        path: ${{ runner.temp }}/IBMJDK
-        key: ${{ runner.os }}-primes
+        path: javaSDK.bin  
+        restore-keys: |
+          ${{ runner.os }}-javaSDK.bin
+        
     - name: Download Java
+      if: steps.cache-packages.outputs.cache-hit != 'true'
       run: |
           wget -O javaSDK.bin http://public.dhe.ibm.com/ibmdl/export/pub/systems/cloud/runtimes/java/7.0.10.85/linux/x86_64/ibm-java-sdk-7.0-10.85-x86_64-archive.bin
           chmod a+x javaSDK.bin
@@ -30,12 +32,12 @@ jobs:
           echo 'USER_INSTALL_DIR=${{ runner.temp }}/IBMJDK' >> installer.properties
     - name: Install Java
       run: ./javaSDK.bin  -i silent 
-    - name: Download Maven
-      run: |
-            curl -sL https://www-eu.apache.org/dist/maven/maven-3/3.6.3/binaries/apache-maven-3.6.3-bin.zip -o maven.zip
-            sudo unzip -d /usr/share maven.zip
-            sudo rm maven.zip
-            sudo ln -s /usr/share/apache-maven-3.6.3/bin/mvn /usr/bin/mvn
+    #- name: Download Maven
+      #run: |
+            #curl -sL https://www-eu.apache.org/dist/maven/maven-3/3.6.3/binaries/apache-maven-3.6.3-bin.zip -o maven.zip
+            #sudo unzip -d /usr/share maven.zip
+            #sudo rm maven.zip
+            #sudo ln -s /usr/share/apache-maven-3.6.3/bin/mvn /usr/bin/mvn
     - name: Build JAR
       run: |
            export JAVA_HOME="${{ runner.temp }}/IBMJDK/jre"
