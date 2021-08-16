@@ -16,14 +16,14 @@ jobs:
     # Steps represent a sequence of tasks that will be executed as part of the job
     steps:
     - uses: actions/checkout@v2
+    
     - uses: actions/cache@v2
-      id: cache-packages  # give it a name for checking the cache hit-or-not
-      
+      id: cache-packages 
       with:
-        path: javaSDK.bin  
-        key: ${{ runner.os }}-javaSDK.bin
+        path: /IBMJDK
+        key: ${{ runner.os }}-/IBMJDK
         restore-keys: |
-          ${{ runner.os }}-javaSDK.bin
+          ${{ runner.os }}-/IBMJDK
         
     - name: Download Java
       if: steps.cache-packages.outputs.cache-hit != 'true'
@@ -32,9 +32,10 @@ jobs:
           chmod a+x javaSDK.bin
           
     - name: Install Java
+      if: steps.cache-packages.outputs.cache-hit != 'true'
       run: |
            echo 'LICENSE_ACCEPTED=TRUE' > installer.properties
-           echo 'USER_INSTALL_DIR=${{ runner.temp }}/IBMJDK' >> installer.properties
+           echo 'USER_INSTALL_DIR=/IBMJDK' >> installer.properties
            ./javaSDK.bin  -i silent 
     #- name: Download Maven
       #run: |
@@ -44,7 +45,7 @@ jobs:
             #sudo ln -s /usr/share/apache-maven-3.6.3/bin/mvn /usr/bin/mvn
     - name: Build JAR
       run: |
-           export JAVA_HOME="${{ runner.temp }}/IBMJDK/jre"
+           export JAVA_HOME="/IBMJDK/jre"
            mvn -B package -f pom.xml
            cd target 
            ls -a
