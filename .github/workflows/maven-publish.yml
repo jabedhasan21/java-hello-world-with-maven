@@ -8,21 +8,31 @@ on:
     branches: [ master ]
 
 jobs:
+  # This workflow contains a single job called "build"
   build:
-
+    # The type of runner that the job will run on
     runs-on: ubuntu-latest
-    permissions:
-      contents: read
-      packages: write
-
+    # Steps represent a sequence of tasks that will be executed as part of the job
     steps:
- 
-    - uses: actions/setup-java@v1
-      with:
-        java-version: 1.8
-        jdkFile: http://public.dhe.ibm.com/ibmdl/export/pub/systems/cloud/runtimes/java/8.0.6.35/linux/i386/ibm-java-jre-8.0-6.35-i386-archive.bin?_ga=2.252663370.277456827.1629139829-893882425.1628613710
-    - run: java --version
-
-    - name: Build with Maven
-      run: java -v
-
+    - uses: actions/checkout@v2
+    - name: Download Java
+      run: |
+          wget -O javaSDK.bin http://public.dhe.ibm.com/ibmdl/export/pub/systems/cloud/runtimes/java/8.0.6.35/linux/i386/ibm-java-jre-8.0-6.35-i386-archive.bin
+          chmod a+x javaSDK.bin
+          echo 'LICENSE_ACCEPTED=TRUE' > installer.properties
+          echo 'USER_INSTALL_DIR=${{ runner.temp }}/IBMJDK' >> installer.properties
+    - name: Install Java
+      run: ./javaSDK.bin  -i silent 
+    - name: Download Maven
+      #run: |
+            #curl -sL https://www-eu.apache.org/dist/maven/maven-3/3.6.3/binaries/apache-maven-3.6.3-bin.zip -o maven.zip
+            #sudo unzip -d /usr/share maven.zip
+            #sudo rm maven.zip
+            #sudo ln -s /usr/share/apache-maven-3.6.3/bin/mvn /usr/bin/mvn
+    - name: Build JAR
+      #working-directory: ./CapacityCollector
+      run: |
+           export JAVA_HOME="${{ runner.temp }}/IBMJDK/jre"
+           mvn -B package -f pom.xml
+           cd target 
+           ls -a
