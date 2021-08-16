@@ -29,7 +29,7 @@ First you’ll need to setup a Java project for Maven to build. To keep the focu
     └── src
         └── main
             └── java
-                └── hello
+                └── hello1
     ```
 + Within the `src/main/java/hello` directory, you can create any Java classes you want. To maintain consistency with the rest of this guide, create these two classes: `HelloWorld.java` and `Greeter.java`.
 
