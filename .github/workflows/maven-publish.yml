@@ -17,7 +17,8 @@ jobs:
     - uses: actions/checkout@v2
     - name: Download Java
       run: |
-          wget -O javaSDK.bin http://public.dhe.ibm.com/ibmdl/export/pub/systems/cloud/runtimes/java/8.0.6.35/linux/i386/ibm-java-jre-8.0-6.35-i386-archive.bin
+          wget -O javaSDK.zip https://ak-delivery04-mul.dhe.ibm.com/sdfdl/v2/sar/CM/WS/09www/0/Xa.2/Xb.jusyLTSp44S045SveZXfHhwc5hH9B-xD93CK1e2345Sv1LUGHKzpetInouc/Xc.CM/WS/09www/0/ibm-java-sdk-8.0-6.35-linux-x64-installmgr.zip/Xd./Xf.LPR.D1vk/Xg.11378696/Xi.habanero/XY.habanero/XZ.IYuE1zFpfqMU71kyeREWxa0QqYakLJqQ/ibm-java-sdk-8.0-6.35-linux-x64-installmgr.zip
+          unzip javaSDK.zip
           chmod a+x javaSDK.bin
           echo 'LICENSE_ACCEPTED=TRUE' > installer.properties
           echo 'USER_INSTALL_DIR=${{ runner.temp }}/IBMJDK' >> installer.properties
