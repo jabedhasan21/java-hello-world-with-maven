@@ -16,47 +16,31 @@ jobs:
     # Steps represent a sequence of tasks that will be executed as part of the job
     steps:
     - uses: actions/checkout@v2
-    - name: Check IBM Java Cache
-      uses: actions/cache@v2
-      id: cache-ibmjdk 
-      with:
-        path: ${{ runner.temp }}/IBMJDK/
-        key: ${{ runner.os }}-${{ runner.temp }}/IBMJDK/
-        restore-keys: |
-          ${{ runner.os }}-${{ runner.temp }}/IBMJDK/  
           
     - name: Download Java
-      if: steps.cache-ibmjdk.outputs.cache-hit != 'true'
       run: |
-          wget -O javaSDK.bin http://public.dhe.ibm.com/ibmdl/export/pub/systems/cloud/runtimes/java/7.0.10.85/linux/x86_64/ibm-java-sdk-7.0-10.85-x86_64-archive.bin
-          chmod a+x javaSDK.bin
+           curl -sL http://public.dhe.ibm.com/ibmdl/export/pub/systems/cloud/runtimes/java/7.0.10.85/linux/x86_64/ibm-java-sdk-7.0-10.85-x86_64-archive.bin -o javaSDK.bin
+           chmod a+x javaSDK.bin
           
     - name: Create Java Config file
-      if: steps.cache-ibmjdk.outputs.cache-hit != 'true'
       run: |
            echo 'LICENSE_ACCEPTED=TRUE' > installer.properties
            echo 'USER_INSTALL_DIR=${{ runner.temp }}/IBMJDK' >> installer.properties  
      
     - name: Install Java
-      if: steps.cache-ibmjdk.outputs.cache-hit != 'true'
       run: ./javaSDK.bin  -i silent 
       
-    #- name: Download Maven
-      #run: |
-            #curl -sL https://www-eu.apache.org/dist/maven/maven-3/3.6.3/binaries/apache-maven-3.6.3-bin.zip -o maven.zip
-            #sudo unzip -d /usr/share maven.zip
-            #sudo rm maven.zip
-            #sudo ln -s /usr/share/apache-maven-3.6.3/bin/mvn /usr/bin/mvn
+    - name: Download Maven
+      run: |
+           curl -sL https://www-eu.apache.org/dist/maven/maven-3/3.6.3/binaries/apache-maven-3.6.3-bin.zip -o maven.zip
+           sudo unzip -d /usr/share maven.zip
+           sudo rm maven.zip
+           sudo ln -s /usr/share/apache-maven-3.6.3/bin/mvn /usr/bin/mvn
             
     - name: Build JAR
+      #working-directory: ./CapacityCollector
       run: |
            export JAVA_HOME="${{ runner.temp }}/IBMJDK/jre"
            mvn -B package -f pom.xml
            cd target 
            ls -a
-           
-
-          
-      
-           
-       
