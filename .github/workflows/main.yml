@@ -16,7 +16,6 @@ jobs:
     # Steps represent a sequence of tasks that will be executed as part of the job
     steps:
      - name: Extract branch name
-       shell: bash
        run: echo ${{ github.head_ref }}
 
 
