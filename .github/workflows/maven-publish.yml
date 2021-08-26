@@ -5,7 +5,9 @@ name: Maven Package
 
 on:
   push:
-    branches: [ master ]
+    branches: [ master, prod ] 
+  pull_request:
+    branches: [ master, prod ] 
 
 jobs:
   # This workflow contains a single job called "build"
@@ -36,3 +38,10 @@ jobs:
            mvn -B package -f pom.xml
            cd target 
            ls -a
+    - name: Upload artifact
+      if : ${{ github.ref == 'refs/heads/master' }}
+      uses: actions/upload-artifact@v2
+      with:
+        name: artifacto
+        path: /target/original-jb-hello-world-maven-0.1.0.jar
+        
