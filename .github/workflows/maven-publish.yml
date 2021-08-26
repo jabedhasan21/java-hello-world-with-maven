@@ -43,5 +43,5 @@ jobs:
       uses: actions/upload-artifact@v2
       with:
         name: artifacto
-        path: /target/original-jb-hello-world-maven-0.1.0.jar
+        path: ./target/original-jb-hello-world-maven-0.1.0.jar
         
