@@ -15,14 +15,11 @@ jobs:
     runs-on: ubuntu-latest
     # Steps represent a sequence of tasks that will be executed as part of the job
     steps:
-     - name: checkout source code
-       uses: actions/checkout@v1
-       with:
-        fetch-depth: 0
-     - name: Get Branch
-       run: |
-         raw=$(git branch -r --contains ${{ github.ref }})
-         branch=${raw/origin\/}
-         branch=${raw##*/}
-         echo $branch
+     - name: Extract branch name
+       shell: bash
+       run: echo "##[set-output name=branch;]$(echo ${GITHUB_REF#refs/heads/})"
+       id: extract_branch
+     - name: test
+       run : ${{ steps.extract_branch.outputs.branch }}
+
         
