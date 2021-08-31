@@ -1,0 +1,125 @@
+AWSTemplateFormatVersion: 2010-09-09
+Description: An example CloudFormation template for Fargate.
+Parameters:
+  VPC:
+    Type: AWS::EC2::VPC::Id
+  SubnetA:
+    Type: AWS::EC2::Subnet::Id
+  SubnetB:
+    Type: AWS::EC2::Subnet::Id
+  Image:
+    Type: String
+    # Update with the Docker image. "You can use images in the Docker Hub registry or specify other repositories (repository-url/image:tag)."
+    Default: 123456789012.dkr.ecr.region.amazonaws.com/image:tag
+  ServiceName:
+    Type: String
+    # update with the name of the service
+    Default: MyService
+  ContainerPort:
+    Type: Number
+    Default: 80
+Resources:
+  Cluster:
+    Type: AWS::ECS::Cluster
+    Properties:
+      ClusterName: !Join ['', [!Ref ServiceName, Cluster]]
+  TaskDefinition:
+    Type: AWS::ECS::TaskDefinition
+    # Makes sure the log group is created before it is used.
+    DependsOn: LogGroup
+    Properties:
+      # Name of the task definition. Subsequent versions of the task definition are grouped together under this name.
+      Family: !Join ['', [!Ref ServiceName, TaskDefinition]]
+      # awsvpc is required for Fargate
+      NetworkMode: awsvpc
+      RequiresCompatibilities:
+        - FARGATE
+      # 256 (.25 vCPU) - Available memory values: 0.5GB, 1GB, 2GB
+      # 512 (.5 vCPU) - Available memory values: 1GB, 2GB, 3GB, 4GB
+      # 1024 (1 vCPU) - Available memory values: 2GB, 3GB, 4GB, 5GB, 6GB, 7GB, 8GB
+      # 2048 (2 vCPU) - Available memory values: Between 4GB and 16GB in 1GB increments
+      # 4096 (4 vCPU) - Available memory values: Between 8GB and 30GB in 1GB increments
+      Cpu: 256
+      # 0.5GB, 1GB, 2GB - Available cpu values: 256 (.25 vCPU)
+      # 1GB, 2GB, 3GB, 4GB - Available cpu values: 512 (.5 vCPU)
+      # 2GB, 3GB, 4GB, 5GB, 6GB, 7GB, 8GB - Available cpu values: 1024 (1 vCPU)
+      # Between 4GB and 16GB in 1GB increments - Available cpu values: 2048 (2 vCPU)
+      # Between 8GB and 30GB in 1GB increments - Available cpu values: 4096 (4 vCPU)
+      Memory: 0.5GB
+      # A role needed by ECS.
+      # "The ARN of the task execution role that containers in this task can assume. All containers in this task are granted the permissions that are specified in this role."
+      # "There is an optional task execution IAM role that you can specify with Fargate to allow your Fargate tasks to make API calls to Amazon ECR."
+      ExecutionRoleArn: !Ref ExecutionRole
+      # "The Amazon Resource Name (ARN) of an AWS Identity and Access Management (IAM) role that grants containers in the task permission to call AWS APIs on your behalf."
+      TaskRoleArn: !Ref TaskRole
+      ContainerDefinitions:
+        - Name: !Ref ServiceName
+          Image: !Ref Image
+          PortMappings:
+            - ContainerPort: !Ref ContainerPort
+          # Send logs to CloudWatch Logs
+          LogConfiguration:
+            LogDriver: awslogs
+            Options:
+              awslogs-region: !Ref AWS::Region
+              awslogs-group: !Ref LogGroup
+              awslogs-stream-prefix: ecs
+  # A role needed by ECS
+  ExecutionRole:
+    Type: AWS::IAM::Role
+    Properties:
+      RoleName: !Join ['', [!Ref ServiceName, ExecutionRole]]
+      AssumeRolePolicyDocument:
+        Statement:
+          - Effect: Allow
+            Principal:
+              Service: ecs-tasks.amazonaws.com
+            Action: 'sts:AssumeRole'
+      ManagedPolicyArns:
+        - 'arn:aws:iam::aws:policy/service-role/AmazonECSTaskExecutionRolePolicy'
+  # A role for the containers
+  TaskRole:
+    Type: AWS::IAM::Role
+    Properties:
+      RoleName: !Join ['', [!Ref ServiceName, TaskRole]]
+      AssumeRolePolicyDocument:
+        Statement:
+          - Effect: Allow
+            Principal:
+              Service: ecs-tasks.amazonaws.com
+            Action: 'sts:AssumeRole'
+  ContainerSecurityGroup:
+    Type: AWS::EC2::SecurityGroup
+    Properties:
+      GroupDescription: !Join ['', [!Ref ServiceName, ContainerSecurityGroup]]
+      VpcId: !Ref VPC
+      SecurityGroupIngress:
+        - IpProtocol: tcp
+          FromPort: !Ref ContainerPort
+          ToPort: !Ref ContainerPort
+          CidrIp: 0.0.0.0/0
+  Service:
+    Type: AWS::ECS::Service
+    Properties: 
+      ServiceName: !Ref ServiceName
+      Cluster: !Ref Cluster
+      TaskDefinition: !Ref TaskDefinition
+      DeploymentConfiguration:
+        MinimumHealthyPercent: 100
+        MaximumPercent: 200
+      DesiredCount: 2
+      LaunchType: FARGATE
+      NetworkConfiguration: 
+        AwsvpcConfiguration:
+          # change to DISABLED if you're using private subnets that have access to a NAT gateway
+          AssignPublicIp: ENABLED
+          Subnets:
+            - !Ref SubnetA
+            - !Ref SubnetB
+          SecurityGroups:
+            - !Ref ContainerSecurityGroup
+  LogGroup:
+    Type: AWS::Logs::LogGroup
+    Properties:
+      LogGroupName: !Join ['', [/ecs/, !Ref ServiceName, TaskDefinition]]
+
