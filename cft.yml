@@ -3,14 +3,17 @@ Description: An example CloudFormation template for Fargate.
 Parameters:
   VPC:
     Type: AWS::EC2::VPC::Id
+    Default: vpc-c401d6af
   SubnetA:
     Type: AWS::EC2::Subnet::Id
+    Default: subnet-2ef58155
   SubnetB:
     Type: AWS::EC2::Subnet::Id
+    Default: subnet-a9ec10c2
   Image:
     Type: String
     # Update with the Docker image. "You can use images in the Docker Hub registry or specify other repositories (repository-url/image:tag)."
-    Default: 123456789012.dkr.ecr.region.amazonaws.com/image:tag
+    Default: 308014485776.dkr.ecr.ap-south-1.amazonaws.com/helloworldvam:latest
   ServiceName:
     Type: String
     # update with the name of the service
