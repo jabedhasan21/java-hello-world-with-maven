@@ -101,6 +101,7 @@ Resources:
           FromPort: !Ref ContainerPort
           ToPort: !Ref ContainerPort
           CidrIp: 0.0.0.0/0
+    # service for ecs 
   Service:
     Type: AWS::ECS::Service
     Properties: 
