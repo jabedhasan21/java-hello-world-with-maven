@@ -4,7 +4,7 @@
     <modelVersion>4.0.0</modelVersion>
     <groupId>org.springframework</groupId>
     <artifactId>jb-hello-world-maven</artifactId>
-    <packaging>jar</packaging>
+    <packaging>war</packaging>
     <version>0.1.0</version>
 
     <!-- tag::joda[] -->
@@ -20,11 +20,30 @@
                <artifactId>joda-time</artifactId>
                <version>2.2</version>
            </dependency>
+          <dependency>
+  	<groupId>javax.servlet</groupId>
+  	<artifactId>servlet-api</artifactId>
+  	<version>3.0-alpha-1</version>
+  </dependency>
        </dependencies>
        <!-- end::joda[] -->
        
     <build>
         <plugins>
+            <plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-compiler-plugin</artifactId>
+				<version>3.1</version>
+				<configuration>
+					<source>1.8</source>
+					<target>1.8</target>
+				</configuration>
+			</plugin>
+			<plugin>
+			<groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-war-plugin</artifactId>
+        <version>3.3.1</version>
+      </plugin>
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-shade-plugin</artifactId>
