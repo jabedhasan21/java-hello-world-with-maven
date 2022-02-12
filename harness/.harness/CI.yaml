@@ -29,7 +29,7 @@ pipeline:
                   infrastructure:
                       type: KubernetesDirect
                       spec:
-                          connectorRef: gcp
+                          connectorRef: actualgcp
                           namespace: harness-delegate-ng
               variables:
                   - name: myStageVar
