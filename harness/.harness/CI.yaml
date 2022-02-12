@@ -11,7 +11,7 @@ pipeline:
               identifier: Test_Build_and_Push
               type: CI
               spec:
-                  cloneCodebase: true
+                  cloneCodebase: false
                   execution:
                       steps:
                           - step:
@@ -49,7 +49,7 @@ pipeline:
     properties:
         ci:
             codebase:
-                connectorRef: account.goHelloWorldServer_repo
+                connectorRef: gitconnector
                 build: <+input>
     variables:
         - name: pipelineVar
