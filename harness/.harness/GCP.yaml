@@ -1,0 +1,12 @@
+connector:
+  name: GCP
+  identifier: GCP
+  description:
+  orgIdentifier: default
+  projectIdentifier: sample
+  type: K8sCluster
+  spec:
+    credential:
+      type: InheritFromDelegate
+    delegateSelectors:
+    - delegate
