@@ -1,0 +1,132 @@
+pipeline:
+    name: CI
+    identifier: CI
+    allowStageExecutions: false
+    projectIdentifier: sample
+    orgIdentifier: default
+    tags: {}
+    stages:
+        - stage:
+              name: Build Test and Push
+              identifier: Test_Build_and_Push
+              type: CI
+              spec:
+                  cloneCodebase: true
+                  execution:
+                      steps:
+                          - step:
+                                type: Run
+                                name: Run Unit Tests
+                                identifier: Run_Unit_Tests
+                                spec:
+                                    connectorRef: account.nofar_dockerhub
+                                    image: golang:1.15
+                                    command: |-
+                                        set +e
+                                        go get gotest.tools/gotestsum
+                                        gotestsum --format=standard-verbose --junitfile unit-tests.xml
+                                        exit 0
+                                    privileged: false
+                                    reports:
+                                        type: JUnit
+                                        spec:
+                                            paths:
+                                                - "*.xml"
+                                when:
+                                    stageStatus: Success
+                                failureStrategies: []
+                          - step:
+                                type: Run
+                                name: Go Build
+                                identifier: Go_Build
+                                spec:
+                                    connectorRef: account.nofar_dockerhub
+                                    image: golang:1.15
+                                    command: |-
+                                        set +e
+                                        go get gotest.tools/gotestsum
+                                        CGO_ENABLED=0 GOOS=linux GOARCH=amd64 go build -a -tags netgo
+                                        exit 0
+                                    privileged: false
+                                when:
+                                    stageStatus: Success
+                                failureStrategies: []
+                          - step:
+                                type: Run
+                                name: print content
+                                identifier: print_content
+                                spec:
+                                    connectorRef: account.nofar_dockerhub
+                                    image: alpine
+                                    command: ls -a
+                                    privileged: false
+                          - step:
+                                type: BuildAndPushDockerRegistry
+                                name: Build and push image to DockerHub
+                                identifier: Build_and_push_image_to_DockerHub
+                                spec:
+                                    connectorRef: account.nofar_dockerhub
+                                    repo: bluebbb/godemo
+                                    tags:
+                                        - latest
+                                    optimize: true
+                  infrastructure:
+                      type: KubernetesDirect
+                      spec:
+                          connectorRef: account.k8scluster
+                          namespace: harness-delegate-pmdemo
+                  sharedPaths:
+                      - ""
+              variables:
+                  - name: myStageVar
+                    type: String
+                    value: stageVarValue
+        - stage:
+              name: Run Integration Test
+              identifier: Run_Integration_Test
+              type: CI
+              spec:
+                  cloneCodebase: false
+                  execution:
+                      steps:
+                          - step:
+                                type: Run
+                                name: test connection to server
+                                identifier: test_connection_to_server
+                                spec:
+                                    connectorRef: account.nofar_dockerhub
+                                    image: curlimages/curl:7.69.1
+                                    command: |-
+                                        sleep 5
+                                        curl localhost:8080
+                                    privileged: false
+                          - step:
+                                type: Run
+                                name: echo
+                                identifier: echo
+                                spec:
+                                    connectorRef: account.nofar_dockerhub
+                                    image: alpine
+                                    command: echo "hello"
+                                    privileged: false
+                  serviceDependencies:
+                      - identifier: runhelloworldserver
+                        name: Run Hello World Server
+                        type: Service
+                        spec:
+                            connectorRef: account.nofar_dockerhub
+                            image: bluebbb/godemo:<+pipeline.sequenceId>
+                  infrastructure:
+                      useFromStage: Test_Build_and_Push
+                  sharedPaths:
+                      - ""
+              description: running integ tests
+    properties:
+        ci:
+            codebase:
+                connectorRef: account.goHelloWorldServer_repo
+                build: <+input>
+    variables:
+        - name: pipelineVar
+          type: String
+          value: pipelineVarValue
