@@ -16,16 +16,12 @@ pipeline:
                       steps:
                           - step:
                                 type: Run
-                                name: Go Build
+                                name: Maven Build
                                 identifier: Go_Build
                                 spec:
-                                    connectorRef: account.nofar_dockerhub
-                                    image: golang:1.15
-                                    command: |-
-                                        set +e
-                                        go get gotest.tools/gotestsum
-                                        CGO_ENABLED=0 GOOS=linux GOARCH=amd64 go build -a -tags netgo
-                                        exit 0
+                                    connectorRef: docker
+                                    image: maven
+                                    command: mvn clean install
                                     privileged: false
                                 when:
                                     stageStatus: Success
@@ -35,11 +31,12 @@ pipeline:
                                 name: Build and push image to DockerHub
                                 identifier: Build_and_push_image_to_DockerHub
                                 spec:
-                                    connectorRef: account.nofar_dockerhub
+                                    connectorRef: docker
                                     repo: bluebbb/godemo
                                     tags:
                                         - latest
                                     optimize: true
+                                failureStrategies: []
                   infrastructure:
                       type: KubernetesDirect
                       spec:
