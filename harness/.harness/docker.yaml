@@ -1,0 +1,15 @@
+connector:
+  name: docker
+  identifier: docker
+  description:
+  orgIdentifier: default
+  projectIdentifier: sample
+  type: DockerRegistry
+  spec:
+    dockerRegistryUrl: https://registry.hub.docker.com/v2/
+    providerType: DockerHub
+    auth:
+      type: UsernamePassword
+      spec:
+        username: adiii123
+        passwordRef: gitpwd
