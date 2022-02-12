@@ -7,11 +7,11 @@ pipeline:
     tags: {}
     stages:
         - stage:
-              name: Build Test and Push
+              name: Build Java Application
               identifier: Test_Build_and_Push
               type: CI
               spec:
-                  cloneCodebase: false
+                  cloneCodebase: true
                   execution:
                       steps:
                           - step:
