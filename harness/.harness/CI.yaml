@@ -26,17 +26,6 @@ pipeline:
                                 when:
                                     stageStatus: Success
                                 failureStrategies: []
-                          - step:
-                                type: BuildAndPushDockerRegistry
-                                name: Build and push image to DockerHub
-                                identifier: Build_and_push_image_to_DockerHub
-                                spec:
-                                    connectorRef: docker
-                                    repo: bluebbb/godemo
-                                    tags:
-                                        - latest
-                                    optimize: true
-                                failureStrategies: []
                   infrastructure:
                       type: KubernetesDirect
                       spec:
