@@ -7,7 +7,7 @@ pipeline:
     tags: {}
     stages:
         - stage:
-              name: Build Java Application
+              name: Build and Push Image
               identifier: Test_Build_and_Push
               type: CI
               spec:
