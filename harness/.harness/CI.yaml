@@ -29,6 +29,16 @@ pipeline:
                                 when:
                                     stageStatus: Success
                                 failureStrategies: []
+                          - step:
+                                type: BuildAndPushDockerRegistry
+                                name: build andpush to docker
+                                identifier: build_andpush_to_docker
+                                spec:
+                                    connectorRef: docker
+                                    repo: webappimage/myapp
+                                    tags:
+                                        - <+pipeline.sequenceId>
+                                    dockerfile: java-hello-world-with-maven/docker
                   infrastructure:
                       type: KubernetesDirect
                       spec:
