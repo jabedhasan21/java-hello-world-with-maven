@@ -38,7 +38,7 @@ pipeline:
                                     repo: webappimage/myapp
                                     tags:
                                         - <+pipeline.sequenceId>
-                                    dockerfile: java-hello-world-with-maven/docker
+                                    dockerfile: docker
                   infrastructure:
                       type: KubernetesDirect
                       spec:
