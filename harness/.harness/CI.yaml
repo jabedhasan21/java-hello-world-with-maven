@@ -35,7 +35,7 @@ pipeline:
                                 identifier: build_andpush_to_docker
                                 spec:
                                     connectorRef: docker
-                                    repo: webappimage/myapp
+                                    repo: adiii123/webappimage
                                     tags:
                                         - <+pipeline.sequenceId>
                                     dockerfile: docker
