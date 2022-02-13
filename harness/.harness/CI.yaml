@@ -44,6 +44,14 @@ pipeline:
                       spec:
                           connectorRef: newgcp
                           namespace: harness-delegate-ng
+                  serviceDependencies:
+                      - identifier: depname
+                        name: dep-name
+                        type: Service
+                        spec:
+                            connectorRef: docker
+                            image: tomcat
+                            imagePullPolicy: Always
               variables:
                   - name: myStageVar
                     type: String
