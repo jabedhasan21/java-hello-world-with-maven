@@ -32,9 +32,9 @@ public class HelloController {
   }
   
   public HelloController() {
-    properties props = new Properties();
+    Properties props = new Properties();
     
-    InputSream input = null;
+    InputStream input = null;
     InputStream input1 = null;
     try {
     input = new FileInputStream(System.getProperty("config.properties"));
