@@ -38,7 +38,6 @@ pipeline:
                                     repo: adiii123/webappimage
                                     tags:
                                         - <+pipeline.sequenceId>
-                                    dockerfile: docker
                   infrastructure:
                       type: KubernetesDirect
                       spec:
