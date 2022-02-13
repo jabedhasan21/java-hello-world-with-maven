@@ -21,7 +21,10 @@ pipeline:
                                 spec:
                                     connectorRef: docker
                                     image: maven
-                                    command: mvn clean install
+                                    command: |-
+                                        ls -ltr
+                                        mvn clean install
+                                        pwd
                                     privileged: false
                                 when:
                                     stageStatus: Success
