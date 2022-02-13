@@ -1,7 +1,7 @@
 pipeline:
     name: CI
     identifier: CI
-    allowStageExecutions: false
+    allowStageExecutions: true
     projectIdentifier: sample
     orgIdentifier: default
     tags: {}
