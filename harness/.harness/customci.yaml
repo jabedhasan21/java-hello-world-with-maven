@@ -30,7 +30,7 @@ pipeline:
                                 identifier: to_jfrog
                                 spec:
                                     connectorRef: jfrogactual
-                                    target: myrepo-maven-remote/
+                                    target: myrepo-maven-remote1-libs-snapshot-local/
                                     sourcePath: art/
                   infrastructure:
                       type: KubernetesDirect
