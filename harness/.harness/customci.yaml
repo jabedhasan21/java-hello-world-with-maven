@@ -20,7 +20,7 @@ pipeline:
                                 identifier: to_jfrog
                                 spec:
                                     connectorRef: jfrog
-                                    target: https://vinay28044.jfrog.io/artifactory/default-maven-virtual/
+                                    target: https://vinay28044.jfrog.io/artifactory/default-npm-virtual/
                                     sourcePath: art
                   infrastructure:
                       type: KubernetesDirect
