@@ -15,13 +15,6 @@ pipeline:
                   execution:
                       steps:
                           - step:
-                                type: Plugin
-                                name: plugin
-                                identifier: plugin
-                                spec:
-                                    connectorRef: docker
-                                    image: plugins/slack
-                          - step:
                                 type: ArtifactoryUpload
                                 name: to jfrog
                                 identifier: to_jfrog
