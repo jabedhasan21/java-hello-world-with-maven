@@ -29,7 +29,7 @@ pipeline:
                                 name: to jfrog
                                 identifier: to_jfrog
                                 spec:
-                                    connectorRef: jfrog
+                                    connectorRef: actualjfrog
                                     target: myrepo-maven-remote/Account
                                     sourcePath: art/
                   infrastructure:
