@@ -29,8 +29,8 @@ pipeline:
                                 name: to jfrog
                                 identifier: to_jfrog
                                 spec:
-                                    connectorRef: actualjfrog
-                                    target: mydep/1.0/
+                                    connectorRef: jfrogactual
+                                    target: myrepo-maven-remote/
                                     sourcePath: art/
                   infrastructure:
                       type: KubernetesDirect
