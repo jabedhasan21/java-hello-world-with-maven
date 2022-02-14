@@ -6,7 +6,7 @@ connector:
   projectIdentifier: sample
   type: Artifactory
   spec:
-    artifactoryServerUrl: https://vinay28044.jfrog.io/ui/native/myrepo-maven-remote
+    artifactoryServerUrl: https://vinay28044.jfrog.io
     auth:
       type: UsernamePassword
       spec:
