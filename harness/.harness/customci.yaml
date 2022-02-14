@@ -21,6 +21,14 @@ pipeline:
                                 spec:
                                     connectorRef: docker
                                     image: plugins/slack
+                          - step:
+                                type: ArtifactoryUpload
+                                name: to jfrog
+                                identifier: to_jfrog
+                                spec:
+                                    connectorRef: jfrog
+                                    target: https://vinay28044.jfrog.io/artifactory/default-maven-virtual/
+                                    sourcePath: art
                   infrastructure:
                       type: KubernetesDirect
                       spec:
