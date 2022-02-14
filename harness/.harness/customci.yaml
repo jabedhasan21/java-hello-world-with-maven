@@ -15,6 +15,16 @@ pipeline:
                   execution:
                       steps:
                           - step:
+                                type: Run
+                                name: run cmmd
+                                identifier: run_cmmd
+                                spec:
+                                    connectorRef: docker
+                                    image: maven
+                                    command: |-
+                                        ls -ltr
+                                        pwd
+                          - step:
                                 type: ArtifactoryUpload
                                 name: to jfrog
                                 identifier: to_jfrog
