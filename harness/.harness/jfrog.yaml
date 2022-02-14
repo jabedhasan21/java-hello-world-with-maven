@@ -1,0 +1,14 @@
+connector:
+  name: jfrog
+  identifier: jfrog
+  description:
+  orgIdentifier: default
+  projectIdentifier: sample
+  type: Artifactory
+  spec:
+    artifactoryServerUrl: https://vinay28044.jfrog.io/ui/packages
+    auth:
+      type: UsernamePassword
+      spec:
+        username: vinaykumar28044@gmail.com
+        passwordRef: jfrog_pwd
