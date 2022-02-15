@@ -1,5 +1,5 @@
 pipeline:
-    name: api artifact push
+    name: pushusingapi
     identifier: api_artifact_push
     allowStageExecutions: false
     projectIdentifier: sample
@@ -7,7 +7,7 @@ pipeline:
     tags: {}
     stages:
         - stage:
-              name: Build and Push Image
+              name: Build and Push jar
               identifier: Test_Build_and_Push
               type: CI
               spec:
@@ -16,14 +16,18 @@ pipeline:
                       steps:
                           - step:
                                 type: Run
-                                name: run cmmd
-                                identifier: run_cmmd
+                                name: Maven Build
+                                identifier: Go_Build
                                 spec:
                                     connectorRef: docker
                                     image: maven
                                     command: |-
                                         ls -ltr
                                         pwd
+                                    privileged: false
+                                when:
+                                    stageStatus: Success
+                                failureStrategies: []
                   infrastructure:
                       type: KubernetesDirect
                       spec:
