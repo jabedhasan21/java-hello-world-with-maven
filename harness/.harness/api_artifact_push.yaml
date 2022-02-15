@@ -22,9 +22,12 @@ pipeline:
                                     connectorRef: docker
                                     image: maven
                                     command: |-
-                                        ls -ltr
-                                        pwd
-                                        curl -u -XPUT vinaykumar28044@gmail.com:Chinna@2804 -T art/activation1.1.jar https://vinay28044.jfrog.io/artifactory/api-repo-libs-snapshot
+                                        for file in *;
+                                        do
+                                        if [ "$file" != *".sh" ]; then
+                                        curl -u vinaykumar28044@gmail.com:Chinna@2804 -XPUT https://vinay28044.jfrog.io/artifactory/api-repo-libs-snapshot/$file -T $file
+                                        fi
+                                        done
                                     privileged: false
                                 when:
                                     stageStatus: Success
