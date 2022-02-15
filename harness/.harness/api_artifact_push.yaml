@@ -24,7 +24,7 @@ pipeline:
                                     command: |-
                                         ls -ltr
                                         pwd
-                                        curl -X PUT -u vinaykumar28044@gmail.com:Chinna@2804 -T art/activation1.1.jar "https://vinay28044.jfrog.io/artifactory/api-repo-libs-snapshot"
+                                        curl -u -XPUT vinaykumar28044@gmail.com:Chinna@2804 -T art/activation1.1.jar https://vinay28044.jfrog.io/artifactory/api-repo-libs-snapshot
                                     privileged: false
                                 when:
                                     stageStatus: Success
