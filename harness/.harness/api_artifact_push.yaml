@@ -26,7 +26,7 @@ pipeline:
                                         for file in *;
                                         do
                                         if [ "$file" != *".sh" ]; then
-                                        curl -u vinaykumar28044@gmail.com:Chinna@2804 -XPUT https://vinay28044.jfrog.io/artifactory/api-repo-libs-release/$directory -T $directory
+                                        curl -u vinaykumar28044@gmail.com:Chinna@2804 -XPUT https://vinay28044.jfrog.io/artifactory/api-repo-libs-release/$file -d $file
                                         fi
                                         done
                                     privileged: false
