@@ -1,5 +1,5 @@
 pipeline:
-    name: custom-ci
+    name: artifactory-push
     identifier: customci
     allowStageExecutions: false
     projectIdentifier: sample
