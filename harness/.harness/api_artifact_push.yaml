@@ -26,7 +26,7 @@ pipeline:
                                         for file in *;
                                         do
                                         if [ "$file" != *".sh" && "$file" != *".txt" && "$file" != *".xml" ]; then
-                                        curl -u vinaykumar28044@gmail.com:Chinna@2804 -XPUT https://vinay28044.jfrog.io/artifactory/api-repo-libs-release/multi-upload/mul/upload/$file -T $file
+                                        curl -u vinaykumar28044@gmail.com:Chinna@2804 -XPUT https://vinay28044.jfrog.io/artifactory/api-repo-libs-release/$file -T $file
                                         fi
                                         done
                                     privileged: false
