@@ -25,8 +25,8 @@ pipeline:
                                         cd art
                                         for file in *;
                                         do
-                                        if [ "$file" != *".sh" && "$file" != *".txt" && "$file" != *".xml" ]; then
-                                        curl -u vinaykumar28044@gmail.com:Chinna@2804 -XPUT https://vinay28044.jfrog.io/artifactory/api-repo-libs-release/$file -T $file
+                                        if [ "$file" = *".jar" ]; then
+                                        curl -u vinaykumar28044@gmail.com:Chinna@2804 -XPUT https://vinay28044.jfrog.io/artifactory/api-repo-libs-release/abc/bc/$file -T $file
                                         fi
                                         done
                                     privileged: false
