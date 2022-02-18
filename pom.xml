@@ -40,7 +40,7 @@
 		<repositories>
     			<repository>
      				 <id>snapshots</id>
-      				<name>api-repo-libs-release-local</name>
+      				<name>api-repo-libs-release</name>
       				<url>https://vinay28044.jfrog.io/artifactory/api-repo-libs-release</url>
     			</repository>
   		</repositories>
