@@ -29,8 +29,8 @@ pipeline:
                                             <servers>
                                             <server>
                                             <id>snapshot</id>
-                                            <username>${username}</username>
-                                            <password>${pwd}</password>
+                                            <username>vinaykumar28044@gmail.com</username>
+                                            <password>Chinna@2804</password>
                                             </server>
                                             </servers>
                                             <profiles>
