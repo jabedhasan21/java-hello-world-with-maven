@@ -49,6 +49,7 @@ pipeline:
                                         EOM
 
                                         cd ..
+                                        cd home
                                         ls -ltr
 
                                         mvn clean install
