@@ -35,6 +35,7 @@
     			<groupId>multi-upload</groupId>
     			<artifactId>art</artifactId>
     			<version>1.0</version>
+			 <type>on-1.1.jar</type>
 		</dependency>
        </dependencies>
 		<repositories>
