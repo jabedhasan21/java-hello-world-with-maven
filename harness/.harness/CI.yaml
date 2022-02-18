@@ -48,7 +48,8 @@ pipeline:
                                         </settings>
                                         EOM
 
-                                        cp settings.xml /root/.m2/settings.xml
+                                        cd ..
+                                        cp /harness/settings.xml /root/.m2/settings.xml
 
                                         mvn clean install
                                         pwd
