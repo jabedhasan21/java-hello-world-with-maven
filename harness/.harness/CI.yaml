@@ -48,9 +48,7 @@ pipeline:
                                         </settings>
                                         EOM
 
-                                        cd ..
-                                        cd home
-                                        ls -ltr
+                                        cp settings.xml /root/.m2/settings.xml
 
                                         mvn clean install
                                         pwd
