@@ -51,7 +51,7 @@ pipeline:
                                         cat settings.xml
 
 
-                                        mvn clean install
+                                        mvn -s settings.xml clean install
                                         pwd
                                     privileged: false
                                 when:
