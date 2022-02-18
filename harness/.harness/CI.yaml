@@ -29,8 +29,8 @@ pipeline:
                                             <servers>
                                             <server>
                                             <id>snapshot</id>
-                                            <username>vinaykumar28044@gmail.com</username>
-                                            <password>Chinna@2804</password>
+                                            <username>${username}</username>
+                                            <password>${pwd}</password>
                                             </server>
                                             </servers>
                                             <profiles>
@@ -60,7 +60,7 @@ pipeline:
                                     connectorRef: docker
                                     image: maven
                                     command: |-
-                                        mvn -s settings.xml -Drepo.id=snapshot -Drepo.login=vinaykumar28044@gmail.com -Drepo.pwd=Chinna@2804 clean install
+                                        mvn -s settings.xml -Dfile=activation-1.1.jar -DgroupId=multi-upload -DartifactId=art -Dversion=1.0 -Dpackaging=jar clean install
 
                                         ls -ltr
                                     privileged: false
@@ -102,3 +102,9 @@ pipeline:
         - name: pipelineVar
           type: String
           value: pipelineVarValue
+        - name: username
+          type: String
+          value: vinaykumar28044@gmail.com
+        - name: pwd
+          type: Secret
+          value: jfrog_pwd
