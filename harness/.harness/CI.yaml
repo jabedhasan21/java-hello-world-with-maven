@@ -48,7 +48,9 @@ pipeline:
                                         </settings>
                                         EOM
 
+                                        find .m2
                                         cd ../root
+                                        find .m2
                                         ls -ltr
 
                                         mvn clean install
