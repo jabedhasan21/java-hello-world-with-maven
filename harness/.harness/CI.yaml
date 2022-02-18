@@ -35,6 +35,8 @@ pipeline:
                                             </server>
                                             </servers>
                                             <profiles>
+                                            <profile>
+                                            <id>artifact</id>
                                             <repositories>
                                             <repository>
                                             <id>snapshot</id>
@@ -42,8 +44,10 @@ pipeline:
                                             <url>https://vinay28044.jfrog.io/artifactory/api-repo-libs-release-local</url>
                                             </repository>
                                             </repositories>
+                                            </profile>
                                             </profiles>
-                                            <activeProfiles/>
+                                            <activeProfiles>artifact
+                                            </activeProfiles>
                                         </settings>
                                         EOM
 
