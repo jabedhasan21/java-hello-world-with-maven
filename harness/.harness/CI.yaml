@@ -47,7 +47,9 @@ pipeline:
                                             <activeProfiles/>
                                         </settings>
                                         EOM
-                                        cp settings.xml /.m2/settings.xml
+
+                                        cd ..
+                                        ls -ltr
 
                                         mvn clean install
                                         pwd
