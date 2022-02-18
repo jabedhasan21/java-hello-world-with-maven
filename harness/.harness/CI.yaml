@@ -40,7 +40,6 @@ pipeline:
                                             <id>snapshot</id>
                                             <name>api-repo-libs-release-local</name>
                                             <url>https://vinay28044.jfrog.io/artifactory/api-repo-libs-release-local</url>
-                                            <url>
                                             </repository>
                                             </repositories>
                                             </profiles>
