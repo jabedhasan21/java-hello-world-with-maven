@@ -52,6 +52,8 @@ pipeline:
                                         EOM
 
                                         cat settings.xml
+                                        echo ${username}
+                                        echo ${pwd}
                           - step:
                                 type: Run
                                 name: Maven Build
