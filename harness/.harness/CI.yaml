@@ -16,13 +16,12 @@ pipeline:
                       steps:
                           - step:
                                 type: Run
-                                name: Maven Build
-                                identifier: Go_Build
+                                name: "cat settings "
+                                identifier: cat_settings
                                 spec:
                                     connectorRef: docker
                                     image: maven
-                                    command: |-
-                                        ls -ltr
+                                    command: |
                                         cat > settings.xml <<- EOM
                                         <?xml version="1.0" encoding="UTF-8"?>
                                         <settings xmlns="http://maven.apache.org/SETTINGS/1.2.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
@@ -53,7 +52,15 @@ pipeline:
                                         EOM
 
                                         cat settings.xml
-
+                          - step:
+                                type: Run
+                                name: Maven Build
+                                identifier: Go_Build
+                                spec:
+                                    connectorRef: docker
+                                    image: maven
+                                    command: |-
+                                        
 
                                         mvn -s settings.xml clean install
                                         pwd
