@@ -48,8 +48,7 @@ pipeline:
                                         </settings>
                                         EOM
 
-
-                                        find $root -type d -name ".m2"
+                                        cat settings.xml
 
 
                                         mvn clean install
