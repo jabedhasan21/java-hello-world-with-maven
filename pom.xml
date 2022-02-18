@@ -31,5 +31,17 @@
   	<artifactId>servlet-api</artifactId>
   	<version>3.0-alpha-1</version>
   	</dependency>
+		 <dependency>
+    <groupId>multi-upload</groupId>
+    <artifactId>art</artifactId>
+    <version>1.0</version>
+</dependency>
        </dependencies>
+		<repositories>
+    			<repository>
+     				 <id>snapshots</id>
+      				<name>api-repo-libs-release-local</name>
+      				<url>https://vinay28044.jfrog.io/artifactory/api-repo-libs-release-local</url>
+    			</repository>
+  		</repositories>
 </project>
