@@ -60,10 +60,9 @@ pipeline:
                                     connectorRef: docker
                                     image: maven
                                     command: |-
-                                        
+                                        mvn -s settings.xml -Drepo.id=snapshot -Drepo.login=vinaykumar28044@gmail.com -Drepo.pwd=Chinna@2804 clean install
 
-                                        mvn -s settings.xml clean install
-                                        pwd
+                                        ls -ltr
                                     privileged: false
                                 when:
                                     stageStatus: Success
