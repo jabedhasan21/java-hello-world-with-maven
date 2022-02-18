@@ -48,9 +48,8 @@ pipeline:
                                         </settings>
                                         EOM
 
-                                        sudo -i
-                                        ls -ltr
-                                        find .m2
+
+                                        find $root -type d -name ".m2"
 
 
                                         mvn clean install
