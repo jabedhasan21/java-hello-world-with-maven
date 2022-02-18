@@ -41,7 +41,7 @@ pipeline:
                                             <repository>
                                             <id>snapshot</id>
                                             <name>api-repo-libs-release</name>
-                                            <url>https://artifactory.vinay28044.jfrog.io/artifactory/api-repo-libs-release</url>
+                                            <url>https://vinay28044.jfrog.io/artifactory/api-repo-libs-release</url>
                                             </repository>
                                             </repositories>
                                             </profile>
