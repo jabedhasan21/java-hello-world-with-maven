@@ -32,10 +32,10 @@
   	<version>3.0-alpha-1</version>
   	</dependency>
 		 <dependency>
-    <groupId>documents4j-local1</groupId>
-    <artifactId>documents4j-local2</artifactId>
-    <version>3.0.3</version>
-</dependency>
+              <groupId>ext-jar</groupId>
+              <artifactId>ext-jar</artifactId>
+              <version>1.0</version>
+           </dependency>
        </dependencies>
 		<repositories>
     			<repository>
