@@ -46,7 +46,8 @@ pipeline:
                                             </repositories>
                                             </profile>
                                             </profiles>
-                                            <activeProfiles>artifact
+                                            <activeProfiles>
+                                            <activateProfile>artifact<activateProfile>
                                             </activeProfiles>
                                         </settings>
                                         EOM
