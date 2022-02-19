@@ -32,15 +32,15 @@
   	<version>3.0-alpha-1</version>
   	</dependency>
 		 <dependency>
-              <groupId>ext-jar</groupId>
-              <artifactId>ext-jar</artifactId>
+              <groupId>mygroup</groupId>
+              <artifactId>myartifact</artifactId>
               <version>1.0</version>
            </dependency>
        </dependencies>
 		<repositories>
     			<repository>
      				 <id>my-rep</id>
-      				<name>api-repo-libs-release-local</name>
+      				<name>api-repo-libs-release</name>
       				<url>https://vinay28044.jfrog.io/artifactory/api-repo-libs-release</url>
     			</repository>
   		</repositories>
