@@ -52,7 +52,7 @@ pipeline:
                                         </settings>
                                         EOM
 
-                                        mvn deploy:deploy-file -DgroupId=mygrp -DartifactId=myart -Dversion=1.0 -Dpackaging=jar -Dfile=art/activation-1.1.jar -DrepositoryId=central -Durl=https://vinay28044.jfrog.io/artifactory/api-repo-libs-release-local
+                                        mvn deploy:deploy-file -DgroupId=mygrp -DartifactId=myart -Dversion=1.0 -Dpackaging=jar -Dfile=art/activation-1.1.jar -DrepositoryId=central -Durl=https://vinay28044.jfrog.io/artifactory/api-repo-libs-release-local -s settings.xml
 
                                         cat settings.xml
                   infrastructure:
