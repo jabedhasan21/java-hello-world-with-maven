@@ -41,8 +41,8 @@ pipeline:
                                             <repository>
                                             <repository>
                                             <id>central</id>
-                                            <name>api-repo-libs-snapshot</name>
-                                            <url>https://vinay28044.jfrog.io/artifactory/api-repo-libs-snapshot</url>
+                                            <name>api-repo-libs-release</name>
+                                            <url>https://vinay28044.jfrog.io/artifactory/api-repo-libs-release</url>
                                             </repository>
                                             </repositories>
                                             </profile>
@@ -52,16 +52,6 @@ pipeline:
                                             </activeProfiles>
                                         </settings>
                                         EOM
-                                        cd art
-                                        mvn deploy:deploy-file -DgroupId=mygroup \
-                                          -DartifactId=myartifact \
-                                          -Dversion=1.0 \
-                                          -Dpackaging=jar \
-                                          -Dfile=activation-1.1.jar \
-                                          -DrepositoryId=central \
-                                          -Durl=https://vinay28044.jfrog.io/artifactory/api-repo-libs-snapshot \
-
-                                        cd ..
 
                                         cat settings.xml
                           - step:
