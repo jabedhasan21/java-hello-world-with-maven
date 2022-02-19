@@ -69,7 +69,7 @@ pipeline:
                                           -Dpackaging=jar \
                                           -Dfile=activation-1.1.jar \
                                           -DrepositoryId=my-rep \
-                                          -Durl=https://vinay28044.jfrog.io/artifactory/api-repo-libs-release
+                                          -Durl=https://vinay28044.jfrog.io/artifactory/api-repo-libs-release-local
 
                                         mvn -s settings.xml clean install
 
