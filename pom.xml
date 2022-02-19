@@ -45,8 +45,13 @@
            </dependency>
        </dependencies>
     <repositories>
-   <repository>
-    <id>remote</id>
+	    <repository>
+    	 <id>central</id>
+         <name>maven</name>
+         <url> https://repo.maven.apache.org/maven2/</url>
+         </repository>
+       <repository>
+    <id>central</id>
     <name>api-repo-libs-release</name>
     <url>https://vinay28044.jfrog.io/artifactory/api-repo-libs-release</url>
     </repository>
