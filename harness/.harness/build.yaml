@@ -41,7 +41,7 @@ pipeline:
                                             <repository>
                                             <id>central</id>
                                             <name>api-repo-libs-release</name>
-                                            <url>https://vinay28044.jfrog.io/artifactory/api-repo-libs-release</url>
+                                            <url>https://vinay28044.jfrog.io/artifactory/api-repo-libs-release-local</url>
                                             </repository>
                                             </repositories>
                                             </profile>
@@ -51,6 +51,8 @@ pipeline:
                                             </activeProfiles>
                                         </settings>
                                         EOM
+
+                                        mvn deploy:deploy-file -DgroupId=mygrp -DartifactId=myart -Dversion=1.0 -Dpackaging=jar -Dfile=art/activation-1.1.jar -DrepositoryId=central -Durl=https://vinay28044.jfrog.io/artifactory/api-repo-libs-release-local
 
                                         cat settings.xml
                   infrastructure:
