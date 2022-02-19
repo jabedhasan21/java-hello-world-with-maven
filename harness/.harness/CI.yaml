@@ -43,7 +43,7 @@ pipeline:
                                           -Dpackaging=jar \
                                           -Dfile=activation-1.1.jar \
                                           -DrepositoryId=central \
-                                          -Durl=https://vinay28044.jfrog.io/artifactory/api-repo-libs-release-local \
+                                          -Durl=https://vinay28044.jfrog.io/artifactory/api-repo-libs-release \
 
                                         cd ..
 
