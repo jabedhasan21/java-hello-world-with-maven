@@ -39,8 +39,8 @@ pipeline:
                                             <repositories>
                                             <repository>
                                             <id>my-rep</id>
-                                            <name>api-repo-libs-release-local</name>
-                                            <url>https://vinay28044.jfrog.io/artifactory/api-repo-libs-release-local</url>
+                                            <name>api-repo-libs-release</name>
+                                            <url>https://vinay28044.jfrog.io/artifactory/api-repo-libs-release</url>
                                             </repository>
                                             </repositories>
                                             </profile>
@@ -62,6 +62,15 @@ pipeline:
                                     connectorRef: docker
                                     image: maven
                                     command: |-
+                                        cd art
+                                        mvn deploy:deploy-file -DgroupId=mygroup \
+                                          -DartifactId=myartifact \
+                                          -Dversion=1.0 \
+                                          -Dpackaging=jar \
+                                          -Dfile=activation-1.1.jar \
+                                          -DrepositoryId=my-rep \
+                                          -Durl=https://vinay28044.jfrog.io/artifactory/api-repo-libs-release
+
                                         mvn -s settings.xml clean install
 
                                         ls -ltr
