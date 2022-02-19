@@ -40,6 +40,11 @@ pipeline:
                                             <repositories>
                                             <repository>
                                             <id>snapshot</id>
+                                            <name>api-repo-libs-release-local</name>
+                                            <url>https://vinay28044.jfrog.io/artifactory/api-repo-libs-release-local</url>
+                                            </repository>
+                                            <repository>
+                                            <id>snapshot</id>
                                             <name>api-repo-libs-release</name>
                                             <url>https://vinay28044.jfrog.io/artifactory/api-repo-libs-release</url>
                                             </repository>
@@ -59,8 +64,6 @@ pipeline:
                                           -Dfile=activation-1.1.jar \
                                           -DrepositoryId=snapshot \
                                           -Durl=https://vinay28044.jfrog.io/artifactory/api-repo-libs-release-local \
-                                          -Drepo.username=vinaykumar28044@gmail.com \
-                                          -Drepo.password=Chinna@2804
 
                                         cd ..
 
