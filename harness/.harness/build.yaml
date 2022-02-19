@@ -16,7 +16,7 @@ pipeline:
                       steps:
                           - step:
                                 type: Run
-                                name: "cat settings "
+                                name: jar deploy
                                 identifier: cat_settings
                                 spec:
                                     connectorRef: account.harnessImage
