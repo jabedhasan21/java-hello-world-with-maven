@@ -39,7 +39,7 @@
        </dependencies>
     <repositories>
    <repository>
-    <id>my-repo</id>
+    <id>central</id>
     <name>api-repo-libs-release</name>
     <url>https://vinay28044.jfrog.io/artifactory/api-repo-libs-release</url>
     </repository>
