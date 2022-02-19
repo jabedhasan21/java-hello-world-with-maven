@@ -34,6 +34,22 @@ pipeline:
                                             <password>Chinna@2804</password>
                                             </server>
                                             </servers>
+                                            <profiles>
+                                            <profile>
+                                            <id>artifact</id>
+                                            <repositories>
+                                            <repository>
+                                            <repository>
+                                            <id>central</id>
+                                            <name>api-repo-libs-snapshot</name>
+                                            <url>https://vinay28044.jfrog.io/artifactory/api-repo-libs-snapshot</url>
+                                            </repository>
+                                            </repositories>
+                                            </profile>
+                                            </profiles>
+                                            <activeProfiles>
+                                            <activeProfile>artifact</activeProfile>
+                                            </activeProfiles>
                                         </settings>
                                         EOM
                                         cd art
@@ -43,13 +59,11 @@ pipeline:
                                           -Dpackaging=jar \
                                           -Dfile=activation-1.1.jar \
                                           -DrepositoryId=central \
-                                          -Durl=https://vinay28044.jfrog.io/artifactory/api-repo-libs-release \
+                                          -Durl=https://vinay28044.jfrog.io/artifactory/api-repo-libs-snapshot \
 
                                         cd ..
 
                                         cat settings.xml
-                                        echo "${username}"
-                                        echo "${pwd}"
                           - step:
                                 type: Run
                                 name: Maven Build
