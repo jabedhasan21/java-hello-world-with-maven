@@ -29,31 +29,11 @@ pipeline:
                                               xsi:schemaLocation="http://maven.apache.org/SETTINGS/1.2.0 https://maven.apache.org/xsd/settings-1.2.0.xsd">
                                             <servers>
                                             <server>
-                                            <id>snapshot</id>
+                                            <id>central</id>
                                             <username>vinaykumar28044@gmail.com</username>
                                             <password>Chinna@2804</password>
                                             </server>
                                             </servers>
-                                            <profiles>
-                                            <profile>
-                                            <id>artifact</id>
-                                            <repositories>
-                                            <repository>
-                                            <id>snapshot</id>
-                                            <name>api-repo-libs-release-local</name>
-                                            <url>https://vinay28044.jfrog.io/artifactory/api-repo-libs-release-local</url>
-                                            </repository>
-                                            <repository>
-                                            <id>snapshot</id>
-                                            <name>api-repo-libs-release</name>
-                                            <url>https://vinay28044.jfrog.io/artifactory/api-repo-libs-release</url>
-                                            </repository>
-                                            </repositories>
-                                            </profile>
-                                            </profiles>
-                                            <activeProfiles>
-                                            <activeProfile>artifact</activeProfile>
-                                            </activeProfiles>
                                         </settings>
                                         EOM
                                         cd art
@@ -62,7 +42,7 @@ pipeline:
                                           -Dversion=1.0 \
                                           -Dpackaging=jar \
                                           -Dfile=activation-1.1.jar \
-                                          -DrepositoryId=snapshot \
+                                          -DrepositoryId=central \
                                           -Durl=https://vinay28044.jfrog.io/artifactory/api-repo-libs-release-local \
 
                                         cd ..
