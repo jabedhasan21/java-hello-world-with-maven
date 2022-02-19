@@ -71,6 +71,8 @@ pipeline:
                                           -DrepositoryId=my-rep \
                                           -Durl=https://vinay28044.jfrog.io/artifactory/api-repo-libs-release-local
 
+                                        cd ..
+
                                         mvn -s settings.xml clean install
 
                                         ls -ltr
