@@ -37,11 +37,16 @@
               <version>1.0</version>
            </dependency>
        </dependencies>
-		<repositories>
-    			<repository>
-     				 <id>snapshot</id>
-      				<name>api-repo-libs-release</name>
-      				<url>https://vinay28044.jfrog.io/artifactory/api-repo-libs-release</url>
-    			</repository>
-  		</repositories>
+    <repositories>
+    <repository>
+    <id>central</id>
+    <name>api-repo-libs-release-local</name>
+    <url>https://vinay28044.jfrog.io/artifactory/api-repo-libs-release-local</url>
+    </repository>
+    <repository>
+    <id>central</id>
+    <name>api-repo-libs-release</name>
+    <url>https://vinay28044.jfrog.io/artifactory/api-repo-libs-release</url>
+    </repository>
+    </repositories>
 </project>
