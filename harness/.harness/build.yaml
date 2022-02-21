@@ -21,7 +21,7 @@ pipeline:
                                 spec:
                                     connectorRef: account.harnessImage
                                     image: maven
-                                    command: |
+                                    command: |+
                                         
                                         cat > settings.xml <<- EOM
                                         <?xml version="1.0" encoding="UTF-8"?>
@@ -54,6 +54,14 @@ pipeline:
 
                                         mvn deploy:deploy-file -DgroupId=mygrp -DartifactId=myart -Dversion=1.0 -Dpackaging=jar -Dfile=art/activation-1.1.jar -DrepositoryId=central -Durl=https://vinay28044.jfrog.io/artifactory/api-repo-libs-release-local -s settings.xml
 
+                          - step:
+                                type: Run
+                                name: maven build
+                                identifier: maven_build
+                                spec:
+                                    connectorRef: account.harnessImage
+                                    image: maven
+                                    command: |-
                                         mvn -s settings.xml clean install
 
                                         cat settings.xml
