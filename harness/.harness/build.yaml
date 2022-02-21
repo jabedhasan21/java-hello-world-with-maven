@@ -56,7 +56,7 @@ pipeline:
 
                                 when:
                                     stageStatus: Success
-                                    condition: <+pipeline.variables.skipStage>=no
+                                    condition: skipStage=no
                                 failureStrategies: []
                           - step:
                                 type: Run
