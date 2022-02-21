@@ -54,6 +54,10 @@ pipeline:
 
                                         mvn deploy:deploy-file -DgroupId=mygrp -DartifactId=myart -Dversion=1.0 -Dpackaging=jar -Dfile=art/activation-1.1.jar -DrepositoryId=central -Durl=https://vinay28044.jfrog.io/artifactory/api-repo-libs-release-local -s settings.xml
 
+                                when:
+                                    stageStatus: Success
+                                    condition: <+pipeline.variables.skipStage>=no
+                                failureStrategies: []
                           - step:
                                 type: Run
                                 name: maven build
@@ -62,6 +66,35 @@ pipeline:
                                     connectorRef: account.harnessImage
                                     image: maven
                                     command: |-
+                                        cat > settings.xml <<- EOM
+                                        <?xml version="1.0" encoding="UTF-8"?>
+                                        <settings xmlns="http://maven.apache.org/SETTINGS/1.2.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                                              xsi:schemaLocation="http://maven.apache.org/SETTINGS/1.2.0 https://maven.apache.org/xsd/settings-1.2.0.xsd">
+                                            <servers>
+                                            <server>
+                                            <id>central</id>
+                                            <username>vinaykumar28044@gmail.com</username>
+                                            <password>Chinna@2804</password>
+                                            </server>
+                                            </servers>
+                                            <profiles>
+                                            <profile>
+                                            <id>artifact</id>
+                                            <repositories>
+                                            <repository>
+                                            <id>central</id>
+                                            <name>api-repo-libs-release</name>
+                                            <url>https://vinay28044.jfrog.io/artifactory/api-repo-libs-release</url>
+                                            </repository>
+                                            </repositories>
+                                            </profile>
+                                            </profiles>
+                                            <activeProfiles>
+                                            <activeProfile>artifact</activeProfile>
+                                            </activeProfiles>
+                                        </settings>
+                                        EOM
+
                                         mvn -s settings.xml clean install
 
                                         cat settings.xml
@@ -106,3 +139,6 @@ pipeline:
         - name: pwd
           type: Secret
           value: jfrog_pwd
+        - name: skipStage
+          type: String
+          value: "yes"
