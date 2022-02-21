@@ -124,6 +124,44 @@ pipeline:
                   - name: myStageVar
                     type: String
                     value: stageVarValue
+        - stage:
+              name: deploy to cluster
+              identifier: deploy_to_cluster
+              description: ""
+              type: Deployment
+              spec:
+                  serviceConfig:
+                      serviceRef: sampleservice
+                      serviceDefinition:
+                          type: Kubernetes
+                          spec:
+                              variables: []
+                  infrastructure:
+                      environmentRef: development
+                      infrastructureDefinition:
+                          type: KubernetesDirect
+                          spec:
+                              connectorRef: newgcp
+                              namespace: x
+                              releaseName: release-<+trg>
+                      allowSimultaneousDeployments: true
+                  execution:
+                      steps:
+                          - step:
+                                name: Rollout Deployment
+                                identifier: rolloutDeployment
+                                type: K8sRollingDeploy
+                                timeout: 10m
+                                spec:
+                                    skipDryRun: false
+                      rollbackSteps: []
+              tags: {}
+              failureStrategies:
+                  - onFailure:
+                        errors:
+                            - AllErrors
+                        action:
+                            type: MarkAsSuccess
     properties:
         ci:
             codebase:
