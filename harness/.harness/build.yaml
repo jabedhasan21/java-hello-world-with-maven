@@ -65,6 +65,15 @@ pipeline:
                                         mvn -s settings.xml clean install
 
                                         cat settings.xml
+                          - step:
+                                type: BuildAndPushDockerRegistry
+                                name: build and push docker image
+                                identifier: build_and_push_docker_image
+                                spec:
+                                    connectorRef: account.harnessImage
+                                    repo: adiii123/webappimage
+                                    tags:
+                                        - <+pipeline.sequenceId>
                   infrastructure:
                       type: KubernetesDirect
                       spec:
