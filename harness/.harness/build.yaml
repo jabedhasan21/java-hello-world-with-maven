@@ -204,53 +204,75 @@ pipeline:
                             type: Abort
               variables: []
         - stage:
+              name: Request for Approval
+              identifier: Request_for_Approval
+              description: ""
+              type: Approval
+              spec:
+                  execution:
+                      steps:
+                          - step:
+                                name: Approval
+                                identifier: approval
+                                type: HarnessApproval
+                                timeout: 1d
+                                spec:
+                                    approvalMessage: |-
+                                        Please review the following information
+                                        and approve the pipeline progression
+                                    includePipelineExecutionHistory: true
+                                    approvers:
+                                        minimumCount: 1
+                                        disallowPipelineExecutor: false
+                                        userGroups:
+                                            - QAApprovers
+                                    approverInputs: []
+              tags: {}
+        - stage:
               name: QA-deployment
               identifier: deploy_to_cluster_qa
               description: ""
               type: Deployment
               spec:
                   serviceConfig:
-                      serviceRef: sampleservice
-                      serviceDefinition:
-                          type: Kubernetes
-                          spec:
-                              variables:
-                                  - name: name
-                                    type: String
-                                    value: qa
-                              artifacts:
-                                  primary:
-                                      spec:
-                                          connectorRef: docker1
-                                          imagePath: adiii123/webappimage
-                                          tag: <+pipeline.sequenceId>
-                                      type: DockerRegistry
-                              manifests:
-                                  - manifest:
-                                        identifier: manifest1
-                                        type: K8sManifest
-                                        spec:
-                                            store:
-                                                type: Github
-                                                spec:
-                                                    connectorRef: gitconnector
-                                                    gitFetchType: Branch
-                                                    paths:
-                                                        - deploy/QA/deployment.yaml
-                                                    branch: master-patch
-                                            skipResourceVersioning: false
-                                  - manifest:
-                                        identifier: manifestvalue1
-                                        type: Values
-                                        spec:
-                                            store:
-                                                type: Github
-                                                spec:
-                                                    connectorRef: gitconnector
-                                                    gitFetchType: Branch
-                                                    paths:
-                                                        - deploy/QA/values.yaml
-                                                    branch: master-patch
+                      useFromStage:
+                          stage: deploy_to_cluster
+                      stageOverrides:
+                          artifacts:
+                              sidecars: []
+                              primary:
+                                  spec:
+                                      connectorRef: docker1
+                                      imagePath: adiii123/webappimage
+                                      tag: "22"
+                                  type: DockerRegistry
+                          manifests:
+                              - manifest:
+                                    identifier: manifest1
+                                    type: K8sManifest
+                                    spec:
+                                        store:
+                                            type: Github
+                                            spec:
+                                                connectorRef: gitconnector
+                                                gitFetchType: Branch
+                                                paths:
+                                                    - deploy/QA/deployment.yaml
+                                                branch: master-patch
+                                        skipResourceVersioning: false
+                              - manifest:
+                                    identifier: values1
+                                    type: Values
+                                    spec:
+                                        store:
+                                            type: Github
+                                            spec:
+                                                connectorRef: gitconnector
+                                                gitFetchType: Branch
+                                                paths:
+                                                    - deploy/QA/values.yaml
+                                                branch: master-patch
+                          variables: []
                   infrastructure:
                       environmentRef: development
                       infrastructureDefinition:
