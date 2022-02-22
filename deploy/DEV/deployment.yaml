@@ -1,3 +1,14 @@
+{{- if .Values.env.config}}
+apiVersion: apps
+kind: ConfigMap
+metadata:
+  name: {{.Values.name}}
+data:
+  config.properties: |-
+    Key={{.Values.Key}}
+{{.Values.env.config | toYaml | indent 2}}
+---
+{{- end}}
 apiVersion: apps/v1
 kind: Deployment
 metadata:
