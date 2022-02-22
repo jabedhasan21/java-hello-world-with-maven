@@ -15,5 +15,5 @@ env:
   config:
     config.properties: config.properties
   secrets:
-    username: ${serviceVariable.username}
-    pwd: ${serviceVariable.pwd}
+    username: <+pipeline.variables.username>
+    pwd: <+pipeline.variables.pwd>
