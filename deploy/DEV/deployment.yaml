@@ -10,7 +10,7 @@ data:
 ---
 {{- end}}
 
-{- if .Values.env.secrets}}
+{{- if .Values.env.secrets}}
 apiVersion: v1
 kind: Secret
 metadata:
