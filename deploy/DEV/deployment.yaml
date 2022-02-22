@@ -5,7 +5,7 @@ metadata:
 data:
   config.properties: |-
     Key={{.Values.Key}}
-{{.Values.env.config | b64dec | indent 4}}
+{{.Values.env.config.properties | b64dec | indent 4}}
 ---
 apiVersion: v1
 kind: Secret
