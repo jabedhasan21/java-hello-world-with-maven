@@ -128,7 +128,7 @@ pipeline:
                   pipelineStatus: Failure
                   condition: skipBuildStage=yes
         - stage:
-              name: dev-deployment
+              name: DEV-deployment
               identifier: deploy_to_cluster
               description: ""
               type: Deployment
