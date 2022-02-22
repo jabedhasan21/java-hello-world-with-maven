@@ -1,12 +1,12 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: web-app-deployment
+  name: {{.Values.name}}-deployment
 spec:
-  replicas: 1
+  replicas: {{int .Values.replicas}}
   selector:
     matchLabels:
-      app: web-app
+      app: {{.Values.name}}
   template:
     metadata:
       name: web-app-pod1
@@ -14,7 +14,7 @@ spec:
         app: web-app
     spec:
       containers:
-      - name: web-app-container
+      - name: {{.Values.name}}
         image: {{.Values.image}}
         ports:
         - containerPort: 8080
