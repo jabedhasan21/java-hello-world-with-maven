@@ -248,7 +248,7 @@ pipeline:
                                       spec:
                                           connectorRef: docker1
                                           imagePath: adiii123/webappimage
-                                          tag: "22"
+                                          tag: <+pipeline.sequenceId>
                                       type: DockerRegistry
                               manifests:
                                   - manifest:
