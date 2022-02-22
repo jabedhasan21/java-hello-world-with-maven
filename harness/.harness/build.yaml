@@ -124,6 +124,9 @@ pipeline:
                   - name: myStageVar
                     type: String
                     value: stageVarValue
+              when:
+                  pipelineStatus: Failure
+                  condition: skipBuildStage=yes
         - stage:
               name: dev-deployment
               identifier: deploy_to_cluster
@@ -200,5 +203,8 @@ pipeline:
           type: Secret
           value: jfrog_pwd
         - name: skipStage
+          type: String
+          value: "yes"
+        - name: skipBuildStage
           type: String
           value: "yes"
