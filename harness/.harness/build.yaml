@@ -126,7 +126,7 @@ pipeline:
                     value: stageVarValue
               when:
                   pipelineStatus: Failure
-                  condition: skipBuildStage=yes
+                  condition: skipBuildStage=no
         - stage:
               name: DEV-deployment
               identifier: deploy_to_cluster
