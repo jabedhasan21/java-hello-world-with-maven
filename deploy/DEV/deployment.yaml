@@ -17,9 +17,9 @@ stringData:
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: {{int.Values.name}}
+  name: {{.Values.name}}
 spec:
-  replicas: {{.Values.replicas}}
+  replicas: 1
   selector:
     matchLabels:
       app: {{.Values.name}}
