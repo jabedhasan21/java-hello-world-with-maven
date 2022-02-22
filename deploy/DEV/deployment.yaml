@@ -1,4 +1,3 @@
-{{- if .Values.env.config}}
 apiVersion: v1
 kind: ConfigMap
 metadata:
@@ -8,9 +7,6 @@ data:
     Key={{.Values.Key}}
 {{.Values.env.config | toYaml | indent 2}}
 ---
-{{- end}}
-
-{{- if .Values.env.secrets}}
 apiVersion: v1
 kind: Secret
 metadata:
@@ -18,8 +14,6 @@ name: {{.Values.name}}
 stringData:
 {{.Values.env.secrets | toYaml | indent 2}}
 ---
-{{- end}}
-
 apiVersion: apps/v1
 kind: Deployment
 metadata:
