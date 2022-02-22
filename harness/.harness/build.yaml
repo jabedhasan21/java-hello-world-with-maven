@@ -125,7 +125,7 @@ pipeline:
                     type: String
                     value: stageVarValue
         - stage:
-              name: deploy to cluster
+              name: dev-deployment
               identifier: deploy_to_cluster
               description: ""
               type: Deployment
@@ -136,13 +136,20 @@ pipeline:
                           type: Kubernetes
                           spec:
                               variables: []
+                              artifacts:
+                                  primary:
+                                      spec:
+                                          connectorRef: docker1
+                                          imagePath: adiii123/webappimage
+                                          tag: "22"
+                                      type: DockerRegistry
                   infrastructure:
                       environmentRef: development
                       infrastructureDefinition:
                           type: KubernetesDirect
                           spec:
                               connectorRef: newgcp
-                              namespace: x
+                              namespace: default
                               releaseName: release-<+trg>
                       allowSimultaneousDeployments: true
                   execution:
@@ -162,6 +169,7 @@ pipeline:
                             - AllErrors
                         action:
                             type: MarkAsSuccess
+              variables: []
     properties:
         ci:
             codebase:
