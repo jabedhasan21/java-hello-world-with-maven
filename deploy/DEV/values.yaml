@@ -7,6 +7,7 @@ createNamespace: true
 namespace: <+infra.namespace>
 
 serviceType: LoadBalancer
+dfc: hardcoded
 
 servicePort: 80
 serviceTargetPort: 8080
