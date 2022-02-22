@@ -181,7 +181,7 @@ pipeline:
                           type: KubernetesDirect
                           spec:
                               connectorRef: newgcp
-                              namespace: default
+                              namespace: target
                               releaseName: release-<+trg>
                       allowSimultaneousDeployments: true
                   execution:
@@ -202,7 +202,7 @@ pipeline:
                         errors:
                             - AllErrors
                         action:
-                            type: MarkAsSuccess
+                            type: Abort
               variables: []
     properties:
         ci:
