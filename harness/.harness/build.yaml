@@ -187,13 +187,15 @@ pipeline:
                   execution:
                       steps:
                           - step:
-                                name: Rollout Deployment
-                                identifier: rolloutDeployment
                                 type: K8sRollingDeploy
-                                timeout: 10m
+                                name: sample-app-rolling
+                                identifier: sampleapprolling
                                 spec:
                                     skipDryRun: false
+                                timeout: 10m
+                                failureStrategies: []
                       rollbackSteps: []
+                  serviceDependencies: []
               tags: {}
               failureStrategies:
                   - onFailure:
