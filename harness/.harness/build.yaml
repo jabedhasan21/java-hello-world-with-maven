@@ -160,6 +160,18 @@ pipeline:
                                                         - deploy/deployment.yaml
                                                     branch: master-patch
                                             skipResourceVersioning: false
+                                  - manifest:
+                                        identifier: values
+                                        type: Values
+                                        spec:
+                                            store:
+                                                type: Github
+                                                spec:
+                                                    connectorRef: gitconnector
+                                                    gitFetchType: Branch
+                                                    paths:
+                                                        - deploy/values.yaml
+                                                    branch: master-patch
                   infrastructure:
                       environmentRef: development
                       infrastructureDefinition:
