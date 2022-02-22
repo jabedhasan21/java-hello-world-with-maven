@@ -10,7 +10,7 @@ data:
 apiVersion: v1
 kind: Secret
 metadata:
-name: {{.Values.name}}
+  name: {{.Values.name}}
 stringData:
 {{.Values.env.secrets | toYaml | indent 2}}
 ---
