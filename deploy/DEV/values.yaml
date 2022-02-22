@@ -11,5 +11,6 @@ serviceType: LoadBalancer
 servicePort: 80
 serviceTargetPort: 8080
 mountpathname: dev-deploy
-
-config.properties: ${configFile.getAsString("config.properties")}
+env:
+  config:
+    config.properties: ${configFile.getAsString("config.properties")}
