@@ -17,7 +17,7 @@ kind: Deployment
 metadata:
   name: {{.Values.name}}
 spec:
-  replicas: {{int .Values.replicas}}
+  replicas: {{.Values.replicas}}
   selector:
     matchLabels:
       app: {{.Values.name}}
