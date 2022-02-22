@@ -14,4 +14,4 @@ mountpathname: dev-deploy
 key: key1
 env:
   config:
-    config.properties: ${configFile.getAsString("config.properties")}
+    config.properties: config.properties
