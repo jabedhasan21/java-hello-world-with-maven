@@ -6,6 +6,8 @@ data:
   config.properties: |-
     Key={{.Values.Key}}
 {{.Values.env.config.properties | b64dec | indent 4}}
+  dfc.properties: |-
+    dfc={{.Values.Key}}
 ---
 apiVersion: apps/v1
 kind: Deployment
