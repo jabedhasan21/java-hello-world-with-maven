@@ -27,6 +27,11 @@ spec:
       containers:
       - name: {{.Values.name}}
         image: {{.Values.image}}
+        {{- if .Values.env.config }}
+        envFrom:
+        - configMapRef:
+            name: {{.Values.name}}
+        {{- end}}
         volumeMounts:
         - name: {{.Values.name}}
           mountPath: {{.Values.mountpathname}}
