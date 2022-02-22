@@ -9,12 +9,9 @@ spec:
       app: {{.Values.name}}
   template:
     metadata:
-      name: web-app-pod1
       labels:
-        app: web-app
+        app: {{.Values.name}}
     spec:
       containers:
       - name: {{.Values.name}}
         image: {{.Values.image}}
-        ports:
-        - containerPort: 8080
