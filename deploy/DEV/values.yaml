@@ -11,7 +11,7 @@ serviceType: LoadBalancer
 servicePort: 80
 serviceTargetPort: 8080
 mountpathname: test
-key: key1
+Key: key1
 env:
   config:
     properties: <+secrets.getValue("config")>
