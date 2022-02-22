@@ -164,7 +164,7 @@ pipeline:
                                                     branch: master-patch
                                             skipResourceVersioning: false
                                   - manifest:
-                                        identifier: manifestvalue
+                                        identifier: manifest1
                                         type: Values
                                         spec:
                                             store:
