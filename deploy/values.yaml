@@ -1,4 +1,4 @@
-name: <+stage.variables.name>
+name: dev-deploy
 replicas: 1
 
 image: <+artifact.image>
