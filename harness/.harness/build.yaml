@@ -175,19 +175,6 @@ pipeline:
                                                     paths:
                                                         - deploy
                                                     branch: master-patch
-                                  - manifest:
-                                        identifier: service
-                                        type: K8sManifest
-                                        spec:
-                                            store:
-                                                type: Github
-                                                spec:
-                                                    connectorRef: gitconnector
-                                                    gitFetchType: Branch
-                                                    paths:
-                                                        - deploy
-                                                    branch: master-patch
-                                            skipResourceVersioning: false
                   infrastructure:
                       environmentRef: development
                       infrastructureDefinition:
