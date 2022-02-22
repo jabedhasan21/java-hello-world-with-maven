@@ -1,4 +1,4 @@
-name: dev-deploy
+name: qa-deploy
 replicas: 1
 
 image: <+artifact.image>
