@@ -228,6 +228,83 @@ pipeline:
                                 timeout: 1d
                   serviceDependencies: []
               tags: {}
+        - stage:
+              name: QA-deployment
+              identifier: deploy_to_cluster_qa
+              description: ""
+              type: Deployment
+              spec:
+                  serviceConfig:
+                      serviceRef: sampleservice
+                      serviceDefinition:
+                          type: Kubernetes
+                          spec:
+                              variables:
+                                  - name: name
+                                    type: String
+                                    value: qa
+                              artifacts:
+                                  primary:
+                                      spec:
+                                          connectorRef: docker1
+                                          imagePath: adiii123/webappimage
+                                          tag: "22"
+                                      type: DockerRegistry
+                              manifests:
+                                  - manifest:
+                                        identifier: manifest1
+                                        type: K8sManifest
+                                        spec:
+                                            store:
+                                                type: Github
+                                                spec:
+                                                    connectorRef: gitconnector
+                                                    gitFetchType: Branch
+                                                    paths:
+                                                        - deploy/QA/deployment.yaml
+                                                    branch: master-patch
+                                            skipResourceVersioning: false
+                                  - manifest:
+                                        identifier: manifestvalue1
+                                        type: Values
+                                        spec:
+                                            store:
+                                                type: Github
+                                                spec:
+                                                    connectorRef: gitconnector
+                                                    gitFetchType: Branch
+                                                    paths:
+                                                        - deploy/QA/values.yaml
+                                                    branch: master-patch
+                  infrastructure:
+                      environmentRef: development
+                      infrastructureDefinition:
+                          type: KubernetesDirect
+                          spec:
+                              connectorRef: newgcp
+                              namespace: target
+                              releaseName: release-<+trg>
+                      allowSimultaneousDeployments: true
+                  execution:
+                      steps:
+                          - step:
+                                type: K8sRollingDeploy
+                                name: sample-app-rolling
+                                identifier: sampleapprolling
+                                spec:
+                                    skipDryRun: false
+                                timeout: 10m
+                                failureStrategies: []
+                      rollbackSteps: []
+                  serviceDependencies: []
+              tags: {}
+              failureStrategies:
+                  - onFailure:
+                        errors:
+                            - AllErrors
+                        action:
+                            type: Abort
+              variables: []
     properties:
         ci:
             codebase:
