@@ -151,7 +151,7 @@ pipeline:
                                       type: DockerRegistry
                               manifests:
                                   - manifest:
-                                        identifier: deployment
+                                        identifier: manifest
                                         type: K8sManifest
                                         spec:
                                             store:
@@ -160,7 +160,7 @@ pipeline:
                                                     connectorRef: gitconnector
                                                     gitFetchType: Branch
                                                     paths:
-                                                        - deploy/
+                                                        - deploy/deployment.yaml
                                                     branch: master-patch
                                             skipResourceVersioning: false
                                   - manifest:
@@ -173,7 +173,7 @@ pipeline:
                                                     connectorRef: gitconnector
                                                     gitFetchType: Branch
                                                     paths:
-                                                        - deploy
+                                                        - deploy/values.yaml
                                                     branch: master-patch
                   infrastructure:
                       environmentRef: development
