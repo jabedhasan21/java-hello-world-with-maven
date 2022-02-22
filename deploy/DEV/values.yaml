@@ -1,4 +1,4 @@
-name: dev-deploy
+name: dev
 replicas: 1
 
 image: <+artifact.image>
@@ -7,14 +7,11 @@ createNamespace: true
 namespace: <+infra.namespace>
 
 serviceType: LoadBalancer
-Key: key1
 
 servicePort: 80
 serviceTargetPort: 8080
-mountpathname: dev-deploy
+mountpathname: test
+key: key1
 env:
   config:
     properties: <+secrets.getValue("config")>
-  secrets:
-    username: <+pipeline.variables.username>
-    pwd: <+pipeline.variables.pwd>
