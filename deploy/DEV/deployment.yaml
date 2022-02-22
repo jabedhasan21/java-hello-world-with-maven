@@ -39,6 +39,11 @@ spec:
         image: {{.Values.image}}
         {{- if .Values.env.config }}
         envFrom:
+        {{- if .Values.env.secrets}}
+        - secretRef:
+            name: {{.Values.name}}
+        {{- end}}
+        {{- if .Values.env.config}}
         - configMapRef:
             name: {{.Values.name}}
         {{- end}}
