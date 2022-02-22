@@ -138,7 +138,10 @@ pipeline:
                       serviceDefinition:
                           type: Kubernetes
                           spec:
-                              variables: []
+                              variables:
+                                  - name: name
+                                    type: String
+                                    value: dev
                               artifacts:
                                   primary:
                                       spec:
