@@ -204,30 +204,6 @@ pipeline:
                             type: Abort
               variables: []
         - stage:
-              name: Request Approval for QA Deployment
-              identifier: Request_Approval_for_QA_Deployment
-              description: ""
-              type: Approval
-              spec:
-                  execution:
-                      steps:
-                          - step:
-                                type: HarnessApproval
-                                name: Deployment Approval
-                                identifier: Deployment_Approval
-                                spec:
-                                    approvalMessage: Please review the following information and approve the pipeline progression
-                                    includePipelineExecutionHistory: true
-                                    approvers:
-                                        userGroups:
-                                            - QAApprovers
-                                        minimumCount: 1
-                                        disallowPipelineExecutor: false
-                                    approverInputs: []
-                                timeout: 1d
-                  serviceDependencies: []
-              tags: {}
-        - stage:
               name: QA-deployment
               identifier: deploy_to_cluster_qa
               description: ""
