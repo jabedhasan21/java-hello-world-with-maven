@@ -41,7 +41,7 @@ spec:
         - name: {{.Values.name}}
           configMap:
             name: {{.Values.name}}
----
+ ---
 apiVersion: v1
 kind: Service
 metadata:
