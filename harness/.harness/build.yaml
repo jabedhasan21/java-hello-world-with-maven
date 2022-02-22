@@ -324,3 +324,6 @@ pipeline:
         - name: skipBuildStage
           type: String
           value: "yes"
+        - name: ENVIRONMENT
+          type: Secret
+          value: ENVIRONMENT
