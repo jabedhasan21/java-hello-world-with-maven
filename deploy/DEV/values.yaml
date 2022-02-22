@@ -12,6 +12,4 @@ servicePort: 80
 serviceTargetPort: 8080
 mountpathname: dev-deploy
 
-env:
-  config:
-    config.properties: ${configFile.getAsString("config.properties")}
+config.properties: ${configFile.getAsString("config.properties")}
