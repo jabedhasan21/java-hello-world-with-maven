@@ -36,6 +36,7 @@ spec:
             name: {{.Values.name}}
         - configMapRef:
             name: {{.Values.name}}
+            Key: {{.Values.Key}}
         volumeMounts:
         - name: {{.Values.name}}
           mountPath: {{.Values.mountpathname}}
@@ -43,6 +44,7 @@ spec:
         - name: {{.Values.name}}
           configMap:
             name: {{.Values.name}}
+            Key: {{.Values.Key}}
  ---
 apiVersion: v1
 kind: Service
