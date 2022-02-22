@@ -1,0 +1,4 @@
+image: <+artifact.image>
+
+createNamespace: true
+namespace: <+infra.namespace>
