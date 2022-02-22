@@ -1,9 +1,11 @@
 apiVersion: v1
 kind: ConfigMap
-data:
+metadata:
   name: {{.Values.name}}
 data:
-{{.Values.env.config | toYaml | indent 4}}
+  config.properties: |-
+    Key={{.Values.Key}}
+{{.Values.env.config | b64dec | indent 4}}
 ---
 apiVersion: v1
 kind: Secret
