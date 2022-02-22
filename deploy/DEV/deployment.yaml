@@ -15,6 +15,13 @@ spec:
       containers:
       - name: {{.Values.name}}
         image: {{.Values.image}}
+        volumeMounts:
+        - name: {{.Values.name}}
+          mountPath: {{.Values.mountpathname}}
+      volumes:
+        - name: {{.Values.name}}
+          configMap:
+            name: {{.Values.name}}
 ---
 apiVersion: v1
 kind: Service
