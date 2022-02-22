@@ -10,6 +10,7 @@ serviceType: LoadBalancer
 
 servicePort: 80
 serviceTargetPort: 8080
+mountpathname: dev-deploy
 
 env:
   config:
