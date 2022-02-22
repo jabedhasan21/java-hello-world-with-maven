@@ -149,32 +149,7 @@ pipeline:
                                           imagePath: adiii123/webappimage
                                           tag: "22"
                                       type: DockerRegistry
-                              manifests:
-                                  - manifest:
-                                        identifier: manifest
-                                        type: K8sManifest
-                                        spec:
-                                            store:
-                                                type: Github
-                                                spec:
-                                                    connectorRef: gitconnector
-                                                    gitFetchType: Branch
-                                                    paths:
-                                                        - deploy/deployment.yaml
-                                                    branch: master-patch
-                                            skipResourceVersioning: false
-                                  - manifest:
-                                        identifier: values
-                                        type: Values
-                                        spec:
-                                            store:
-                                                type: Github
-                                                spec:
-                                                    connectorRef: gitconnector
-                                                    gitFetchType: Branch
-                                                    paths:
-                                                        - deploy/values.yaml
-                                                    branch: master-patch
+                              manifests: []
                   infrastructure:
                       environmentRef: development
                       infrastructureDefinition:
