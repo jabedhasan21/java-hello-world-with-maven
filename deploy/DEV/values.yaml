@@ -14,7 +14,7 @@ serviceTargetPort: 8080
 mountpathname: dev-deploy
 env:
   config:
-    config.properties: <+secrets.getValue("config")>
+    properties: <+secrets.getValue("config")>
   secrets:
     username: <+pipeline.variables.username>
     pwd: <+pipeline.variables.pwd>
