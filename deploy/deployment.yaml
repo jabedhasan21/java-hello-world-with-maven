@@ -19,7 +19,7 @@ spec:
 apiVersion: v1
 kind: Service
 metadata:
-  name: {{.Values.name}}-svc
+  name: {{.Values.name}}
 spec:
   type: {{.Values.serviceType}}
   ports:
