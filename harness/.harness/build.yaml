@@ -160,7 +160,7 @@ pipeline:
                                                     connectorRef: gitconnector
                                                     gitFetchType: Branch
                                                     paths:
-                                                        - deploy/deployment.yaml
+                                                        - deploy/DEV/deployment.yaml
                                                     branch: master-patch
                                             skipResourceVersioning: false
                                   - manifest:
@@ -173,7 +173,7 @@ pipeline:
                                                     connectorRef: gitconnector
                                                     gitFetchType: Branch
                                                     paths:
-                                                        - deploy/values.yaml
+                                                        - deploy/DEV/values.yaml
                                                     branch: master-patch
                   infrastructure:
                       environmentRef: development
