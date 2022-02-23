@@ -1,6 +1,6 @@
 name: dev
 replicas: 1
-
+label: webapp
 image: <+artifact.image>
 createNamespace: true
 namespace: <+infra.namespace>
