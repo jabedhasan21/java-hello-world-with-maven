@@ -2,16 +2,10 @@ name: dev
 replicas: 1
 
 image: <+artifact.image>
-
 createNamespace: true
 namespace: <+infra.namespace>
-
-serviceType: LoadBalancer
-
-servicePort: 80
-serviceTargetPort: 8080
 mountpathname: dev
-secretvalue: <+pipeline.variables.ENVIRONMENT>
 env:
   config:
     properties: <+secrets.getValue("devconfig")>
+  secrets: "test"
