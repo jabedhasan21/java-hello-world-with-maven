@@ -38,8 +38,10 @@ spec:
         envFrom:
         - configMapRef:
             name: {{.Values.name}}
+        {{- if .Values.env.secrets}
         - secretRef:
             name: {{.Values.name}}
+        {{- end}}
         volumeMounts:
         - name: {{.Values.name}}
           mountPath: {{.Values.mountpathname}}
