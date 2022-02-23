@@ -1,0 +1,12 @@
+connector:
+  name: gcp-connector
+  identifier: gcpconnector
+  description:
+  orgIdentifier: default
+  projectIdentifier: sample
+  type: K8sCluster
+  spec:
+    credential:
+      type: InheritFromDelegate
+    delegateSelectors:
+    - connector-delegate
