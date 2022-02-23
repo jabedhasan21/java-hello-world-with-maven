@@ -36,6 +36,8 @@ spec:
         ports:
         - containerPort: {{.Values.serviceTargetPort}}
         envFrom:
+        - configMapRef:
+            name: {{.Values.name}}
         volumeMounts:
         - name: {{.Values.name}}
           mountPath: {{.Values.mountpathname}}
