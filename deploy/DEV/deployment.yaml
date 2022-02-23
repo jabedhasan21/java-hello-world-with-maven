@@ -4,10 +4,17 @@ metadata:
   name: {{.Values.name}}
 data:
   config.properties: |-
-    Key={{.Values.secretvalue}}
+    Key={{.Values.Key}}
 {{.Values.env.config.properties | b64dec | indent 4}}
   abc.properties: |-
 {{.Values.env.config.properties | b64dec | indent 4}}
+---
+apiVersion: v1
+kind: Secret
+metadata:
+  name: {{.Values.name}}
+stringData:
+{{.Values.env.secrets | b64dec | indent 4}}
 ---
 apiVersion: apps/v1
 kind: Deployment
