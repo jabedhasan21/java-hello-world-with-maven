@@ -214,6 +214,42 @@ pipeline:
                         serviceConfig:
                             useFromStage:
                                 stage: deploy_to_cluster
+                            stageOverrides:
+                                artifacts:
+                                    sidecars: []
+                                    primary:
+                                        spec:
+                                            connectorRef: docker1
+                                            imagePath: adiii123/webappimage
+                                            tag: "22"
+                                        type: DockerRegistry
+                                manifests:
+                                    - manifest:
+                                          identifier: testmanifest
+                                          type: K8sManifest
+                                          spec:
+                                              store:
+                                                  type: Github
+                                                  spec:
+                                                      connectorRef: gitconnector
+                                                      gitFetchType: Branch
+                                                      paths:
+                                                          - deploy/TEST/deployment.yaml
+                                                      branch: feature
+                                              skipResourceVersioning: false
+                                    - manifest:
+                                          identifier: testvalues
+                                          type: Values
+                                          spec:
+                                              store:
+                                                  type: Github
+                                                  spec:
+                                                      connectorRef: gitconnector
+                                                      gitFetchType: Branch
+                                                      paths:
+                                                          - deploy/TEST/values.yaml
+                                                      branch: feature
+                                variables: []
                         infrastructure:
                             environmentRef: development
                             infrastructureDefinition:
@@ -291,7 +327,7 @@ pipeline:
                                   type: DockerRegistry
                           manifests:
                               - manifest:
-                                    identifier: manifest1
+                                    identifier: qamanifest
                                     type: K8sManifest
                                     spec:
                                         store:
@@ -301,10 +337,10 @@ pipeline:
                                                 gitFetchType: Branch
                                                 paths:
                                                     - deploy/QA/deployment.yaml
-                                                branch: master-patch
+                                                branch: feature
                                         skipResourceVersioning: false
                               - manifest:
-                                    identifier: values1
+                                    identifier: qavalues
                                     type: Values
                                     spec:
                                         store:
@@ -314,7 +350,7 @@ pipeline:
                                                 gitFetchType: Branch
                                                 paths:
                                                     - deploy/QA/values.yaml
-                                                branch: master-patch
+                                                branch: feature
                           variables: []
                   infrastructure:
                       environmentRef: development
