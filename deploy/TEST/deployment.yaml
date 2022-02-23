@@ -1,1 +1,53 @@
-
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: {{.Values.name}}
+data:
+  config.properties: |-
+    Key={{.Values.Key}}
+{{.Values.env.config.properties | b64dec | indent 4}}
+  dfc.properties: |-
+    dfc={{.Values.dfc}}
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{.Values.name}}
+spec:
+  replicas: {{int .Values.replicas}}
+  selector:
+    matchLabels:
+      app: {{.Values.name}}
+  template:
+    metadata:
+      labels:
+        app: {{.Values.name}}
+    spec:
+      containers:
+      - name: {{.Values.name}}
+        image: {{.Values.image}}
+        {{- if .Values.env.config.properties}}
+        envFrom:
+        - configMapRef:
+            name: {{.Values.name}}
+        {{- end}}
+        volumeMounts:
+        - name: {{.Values.name}}
+          mountPath: {{.Values.mountpathname}}
+      volumes:
+        - name: {{.Values.name}}
+          configMap:
+            name: {{.Values.name}}
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: {{.Values.name}}
+spec:
+  type: {{.Values.serviceType}}
+  ports:
+  - port: {{.Values.servicePort}}
+    targetPort: {{.Values.serviceTargetPort}}
+    protocol: TCP
+  selector:
+    app: {{.Values.name}}
