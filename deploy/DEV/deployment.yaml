@@ -35,11 +35,9 @@ spec:
         image: {{.Values.image}}
         ports:
         - containerPort: {{.Values.serviceTargetPort}}
-        {{- if .Values.env.config.properties}}
         envFrom:
         - configMapRef:
             name: {{.Values.name}}
-        {{- end}}
         volumeMounts:
         - name: {{.Values.name}}
           mountPath: {{.Values.mountpathname}}
@@ -54,9 +52,8 @@ metadata:
   name: {{.Values.name}}
 spec:
   type: {{.Values.serviceType}}
+  selector:
+    app: {{.Values.name}}
   ports:
   - port: {{.Values.servicePort}}
     targetPort: {{.Values.serviceTargetPort}}
-    protocol: TCP
-  selector:
-    app: {{.Values.name}}
