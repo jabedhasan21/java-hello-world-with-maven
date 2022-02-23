@@ -110,7 +110,7 @@ pipeline:
                   infrastructure:
                       type: KubernetesDirect
                       spec:
-                          connectorRef: gcpconnector
+                          connectorRef: gcpauto
                           namespace: harness-delegate-ng
                   serviceDependencies:
                       - identifier: depname
@@ -177,7 +177,7 @@ pipeline:
                             infrastructureDefinition:
                                 type: KubernetesDirect
                                 spec:
-                                    connectorRef: gcpconnector
+                                    connectorRef: gcpauto
                                     namespace: target
                                     releaseName: release-<+trg>
                             allowSimultaneousDeployments: true
@@ -347,7 +347,7 @@ pipeline:
                       infrastructureDefinition:
                           type: KubernetesDirect
                           spec:
-                              connectorRef: gcpconnector
+                              connectorRef: gcpauto
                               namespace: target
                               releaseName: release-<+trg>
                       allowSimultaneousDeployments: true
