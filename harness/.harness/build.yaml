@@ -138,17 +138,8 @@ pipeline:
                             serviceDefinition:
                                 type: Kubernetes
                                 spec:
-                                    variables:
-                                        - name: name
-                                          type: String
-                                          value: dev
-                                    artifacts:
-                                        primary:
-                                            spec:
-                                                connectorRef: featuredocker
-                                                imagePath: adiii123/webappimage
-                                                tag: <+pipeline.sequenceId>
-                                            type: DockerRegistry
+                                    variables: []
+                                    artifacts: {}
                                     manifests:
                                         - manifest:
                                               identifier: devconfig
@@ -318,12 +309,6 @@ pipeline:
                       stageOverrides:
                           artifacts:
                               sidecars: []
-                              primary:
-                                  spec:
-                                      connectorRef: docker1
-                                      imagePath: adiii123/webappimage
-                                      tag: "22"
-                                  type: DockerRegistry
                           manifests:
                               - manifest:
                                     identifier: qamanifest
