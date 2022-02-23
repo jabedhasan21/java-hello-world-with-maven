@@ -15,4 +15,3 @@ secretvalue: <+pipeline.variables.ENVIRONMENT>
 env:
   config:
     properties: <+secrets.getValue("devconfig")>
-    properties: <+secrets.getValue("devabc")>
