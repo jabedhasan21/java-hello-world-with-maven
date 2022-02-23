@@ -182,7 +182,7 @@ pipeline:
                                 type: KubernetesDirect
                                 spec:
                                     connectorRef: newgcp
-                                    namespace: target
+                                    namespace: deploy
                                     releaseName: release-<+trg>
                             allowSimultaneousDeployments: true
                         execution:
