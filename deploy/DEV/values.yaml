@@ -7,12 +7,13 @@ createNamespace: true
 namespace: <+infra.namespace>
 
 serviceType: LoadBalancer
-dfc: hardcoded
 
 servicePort: 80
 serviceTargetPort: 8080
 mountpathname: test
-Key: <+pipeline.variables.ENVIRONMENT>
+devconfigpwd: <+pipeline.variables.devconfigpwd>
+devabcpwd: <+pipeline.variables.devabcpwd>
 env:
   config:
-    properties: <+secrets.getValue("config")>
+    properties: <+secrets.getValue("devconfig")>
+    properties1: <+secrets.getValue("devabc")>
