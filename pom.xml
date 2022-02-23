@@ -3,8 +3,8 @@
     <modelVersion>4.0.0</modelVersion>
     <groupId>mydomain</groupId>
     <artifactId>myapp</artifactId>
+    <version>0.0.1-SNAPSHOT</version>
     <packaging>war</packaging>
-    <version>0.1.0</version>
 
         
     <build>
@@ -32,6 +32,7 @@
   	<version>3.0-alpha-1</version>
   	</dependency>
 		 <!-- https://mvnrepository.com/artifact/log4j/log4j -->
+<!--		 
               <dependency>
               <groupId>log4j</groupId>
               <artifactId>log4j</artifactId>
@@ -56,4 +57,6 @@
     <url>https://vinay28044.jfrog.io/artifactory/api-repo-libs-release</url>
     </repository>
     </repositories>
+-->
+</dependencies>
 </project>
