@@ -216,12 +216,6 @@ pipeline:
                             stageOverrides:
                                 artifacts:
                                     sidecars: []
-                                    primary:
-                                        spec:
-                                            connectorRef: docker1
-                                            imagePath: adiii123/webappimage
-                                            tag: "22"
-                                        type: DockerRegistry
                                 manifests:
                                     - manifest:
                                           identifier: testmanifest
