@@ -11,7 +11,7 @@ serviceType: LoadBalancer
 servicePort: 80
 serviceTargetPort: 8080
 mountpathname: dev
-Key: <+pipeline.variables.ENVIRONMENT>
+secretvalue: <+pipeline.variables.ENVIRONMENT>
 env:
   config:
     properties: <+secrets.getValue("config")>
