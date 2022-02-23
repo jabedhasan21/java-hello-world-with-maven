@@ -150,7 +150,32 @@ pipeline:
                                                 imagePath: adiii123/webappimage
                                                 tag: "22"
                                             type: DockerRegistry
-                                    manifests: []
+                                    manifests:
+                                        - manifest:
+                                              identifier: devconfig
+                                              type: K8sManifest
+                                              spec:
+                                                  store:
+                                                      type: Github
+                                                      spec:
+                                                          connectorRef: gitconnector
+                                                          gitFetchType: Branch
+                                                          paths:
+                                                              - deploy/DEV/deployment.yaml
+                                                          branch: feature
+                                                  skipResourceVersioning: false
+                                        - manifest:
+                                              identifier: devabc
+                                              type: Values
+                                              spec:
+                                                  store:
+                                                      type: Github
+                                                      spec:
+                                                          connectorRef: gitconnector
+                                                          gitFetchType: Branch
+                                                          paths:
+                                                              - deploy/DEV/values.yaml
+                                                          branch: feature
                         infrastructure:
                             environmentRef: development
                             infrastructureDefinition:
