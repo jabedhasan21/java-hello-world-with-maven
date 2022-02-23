@@ -125,8 +125,7 @@ pipeline:
                     type: String
                     value: stageVarValue
               when:
-                  pipelineStatus: Failure
-                  condition: skipBuildStage=no
+                  pipelineStatus: Success
         - parallel:
               - stage:
                     name: DEV-deployment
@@ -146,9 +145,9 @@ pipeline:
                                     artifacts:
                                         primary:
                                             spec:
-                                                connectorRef: docker1
+                                                connectorRef: featuredocker
                                                 imagePath: adiii123/webappimage
-                                                tag: "70"
+                                                tag: <+pipeline.sequenceId>
                                             type: DockerRegistry
                                     manifests:
                                         - manifest:
