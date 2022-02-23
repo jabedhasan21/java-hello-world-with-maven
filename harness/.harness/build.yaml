@@ -399,3 +399,12 @@ pipeline:
         - name: ENVIRONMENT
           type: Secret
           value: ENVIRONMENT
+        - name: password1
+          type: Secret
+          value: password1
+        - name: constring
+          type: Secret
+          value: constring
+        - name: Key
+          type: Secret
+          value: Key
