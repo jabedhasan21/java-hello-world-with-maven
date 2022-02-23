@@ -8,4 +8,5 @@ mountpathname: app
 env:
   config:
     properties: <+secrets.getValue("config")>
+    properties: <+secrets.getValue("devconfig")>
   secrets: "test"
