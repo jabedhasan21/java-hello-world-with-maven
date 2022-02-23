@@ -405,3 +405,9 @@ pipeline:
         - name: ENVIRONMENT
           type: Secret
           value: ENVIRONMENT
+        - name: devconfigpwd
+          type: Secret
+          value: ENVIRONMENT
+        - name: devabcpwd
+          type: Secret
+          value: devabcpwd
