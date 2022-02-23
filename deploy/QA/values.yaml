@@ -1,4 +1,4 @@
-name: qa-deploy
+name: qa
 replicas: 1
 
 image: <+artifact.image>
@@ -7,6 +7,12 @@ createNamespace: true
 namespace: <+infra.namespace>
 
 serviceType: LoadBalancer
+dfc: hardcoded
 
 servicePort: 80
 serviceTargetPort: 8080
+mountpathname: test
+Key: <+pipeline.variables.ENVIRONMENT>
+env:
+  config:
+    properties: <+secrets.getValue("config")>
