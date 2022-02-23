@@ -10,7 +10,7 @@ serviceType: LoadBalancer
 
 servicePort: 80
 serviceTargetPort: 8080
-mountpathname: test
+mountpathname: dev
 devconfigpwd: <+pipeline.variables.devconfigpwd>
 devabcpwd: <+pipeline.variables.devabcpwd>
 env:
