@@ -127,83 +127,125 @@ pipeline:
               when:
                   pipelineStatus: Failure
                   condition: skipBuildStage=no
-        - stage:
-              name: DEV-deployment
-              identifier: deploy_to_cluster
-              description: ""
-              type: Deployment
-              spec:
-                  serviceConfig:
-                      serviceRef: sampleservice
-                      serviceDefinition:
-                          type: Kubernetes
-                          spec:
-                              variables:
-                                  - name: name
-                                    type: String
-                                    value: dev
-                              artifacts:
-                                  primary:
-                                      spec:
-                                          connectorRef: docker1
-                                          imagePath: adiii123/webappimage
-                                          tag: "22"
-                                      type: DockerRegistry
-                              manifests:
-                                  - manifest:
-                                        identifier: manifest2
-                                        type: K8sManifest
-                                        spec:
-                                            store:
-                                                type: Github
-                                                spec:
-                                                    connectorRef: gitconnector
-                                                    gitFetchType: Branch
-                                                    paths:
-                                                        - deploy/DEV/deployment.yaml
-                                                    branch: feature
-                                            skipResourceVersioning: false
-                                  - manifest:
-                                        identifier: manifest3
-                                        type: Values
-                                        spec:
-                                            store:
-                                                type: Github
-                                                spec:
-                                                    connectorRef: gitconnector
-                                                    gitFetchType: Branch
-                                                    paths:
-                                                        - deploy/DEV/values.yaml
-                                                    branch: feature
-                  infrastructure:
-                      environmentRef: development
-                      infrastructureDefinition:
-                          type: KubernetesDirect
-                          spec:
-                              connectorRef: newgcp
-                              namespace: target
-                              releaseName: release-<+trg>
-                      allowSimultaneousDeployments: true
-                  execution:
-                      steps:
-                          - step:
-                                type: K8sRollingDeploy
-                                name: sample-app-rolling
-                                identifier: sampleapprolling
+        - parallel:
+              - stage:
+                    name: DEV-deployment
+                    identifier: deploy_to_cluster
+                    description: ""
+                    type: Deployment
+                    spec:
+                        serviceConfig:
+                            serviceRef: sampleservice
+                            serviceDefinition:
+                                type: Kubernetes
                                 spec:
-                                    skipDryRun: false
-                                timeout: 10m
-                                failureStrategies: []
-                      rollbackSteps: []
-                  serviceDependencies: []
-              tags: {}
-              failureStrategies:
-                  - onFailure:
-                        errors:
-                            - AllErrors
-                        action:
-                            type: Abort
-              variables: []
+                                    variables:
+                                        - name: name
+                                          type: String
+                                          value: dev
+                                    artifacts:
+                                        primary:
+                                            spec:
+                                                connectorRef: docker1
+                                                imagePath: adiii123/webappimage
+                                                tag: "22"
+                                            type: DockerRegistry
+                                    manifests:
+                                        - manifest:
+                                              identifier: manifest2
+                                              type: K8sManifest
+                                              spec:
+                                                  store:
+                                                      type: Github
+                                                      spec:
+                                                          connectorRef: gitconnector
+                                                          gitFetchType: Branch
+                                                          paths:
+                                                              - deploy/DEV/deployment.yaml
+                                                          branch: feature
+                                                  skipResourceVersioning: false
+                                        - manifest:
+                                              identifier: manifest3
+                                              type: Values
+                                              spec:
+                                                  store:
+                                                      type: Github
+                                                      spec:
+                                                          connectorRef: gitconnector
+                                                          gitFetchType: Branch
+                                                          paths:
+                                                              - deploy/DEV/values.yaml
+                                                          branch: feature
+                        infrastructure:
+                            environmentRef: development
+                            infrastructureDefinition:
+                                type: KubernetesDirect
+                                spec:
+                                    connectorRef: newgcp
+                                    namespace: target
+                                    releaseName: release-<+trg>
+                            allowSimultaneousDeployments: true
+                        execution:
+                            steps:
+                                - step:
+                                      type: K8sRollingDeploy
+                                      name: sample-app-rolling
+                                      identifier: sampleapprolling
+                                      spec:
+                                          skipDryRun: false
+                                      timeout: 10m
+                                      failureStrategies: []
+                            rollbackSteps: []
+                        serviceDependencies: []
+                    tags: {}
+                    failureStrategies:
+                        - onFailure:
+                              errors:
+                                  - AllErrors
+                              action:
+                                  type: Abort
+                    variables: []
+              - stage:
+                    name: TEST-deployment
+                    identifier: testdeploy
+                    description: ""
+                    type: Deployment
+                    spec:
+                        serviceConfig:
+                            useFromStage:
+                                stage: deploy_to_cluster
+                        infrastructure:
+                            environmentRef: development
+                            infrastructureDefinition:
+                                type: KubernetesDirect
+                                spec:
+                                    connectorRef: newgcp
+                                    namespace: target
+                                    releaseName: release-<+INFRA_KEY>
+                            allowSimultaneousDeployments: false
+                        execution:
+                            steps:
+                                - step:
+                                      name: Rollout Deployment
+                                      identifier: rolloutDeployment
+                                      type: K8sRollingDeploy
+                                      timeout: 10m
+                                      spec:
+                                          skipDryRun: false
+                            rollbackSteps:
+                                - step:
+                                      name: Rollback Rollout Deployment
+                                      identifier: rollbackRolloutDeployment
+                                      type: K8sRollingRollback
+                                      timeout: 10m
+                                      spec: {}
+                    failureStrategies:
+                        - onFailure:
+                              errors:
+                                  - AllErrors
+                              action:
+                                  type: Abort
+                    tags: {}
         - stage:
               name: Request for Approval
               identifier: Request_for_Approval
