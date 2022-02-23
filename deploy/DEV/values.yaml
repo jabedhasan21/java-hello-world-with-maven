@@ -11,9 +11,7 @@ serviceType: LoadBalancer
 servicePort: 80
 serviceTargetPort: 8080
 mountpathname: dev
-devconfigpwd: <+pipeline.variables.devconfigpwd>
-devabcpwd: <+pipeline.variables.devabcpwd>
+key: <+pipeline.variables.ENVIRONMENT>
 env:
   config:
-    properties: <+secrets.getValue("devconfig")>
-    properties1: <+secrets.getValue("devabc")>
+    properties: <+secrets.getValue("config")>
