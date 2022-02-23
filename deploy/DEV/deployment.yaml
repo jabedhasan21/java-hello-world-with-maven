@@ -14,7 +14,7 @@ kind: Secret
 metadata:
   name: {{.Values.name}}
 stringData:
-{{.Values.env.secrets | b64dec | indent 4}}
+{{.Values.env.secrets | toYaml | indent 4}}
 ---
 apiVersion: apps/v1
 kind: Deployment
