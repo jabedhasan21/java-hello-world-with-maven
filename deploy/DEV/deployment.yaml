@@ -36,10 +36,6 @@ spec:
         ports:
         - containerPort: {{.Values.serviceTargetPort}}
         envFrom:
-        {{- if .Values.env.secrets}}
-        - secretRef:
-            name: {{.Values.name}}
-        {{- end}}
         volumeMounts:
         - name: {{.Values.name}}
           mountPath: {{.Values.mountpathname}}
