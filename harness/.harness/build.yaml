@@ -150,32 +150,7 @@ pipeline:
                                                 imagePath: adiii123/webappimage
                                                 tag: "22"
                                             type: DockerRegistry
-                                    manifests:
-                                        - manifest:
-                                              identifier: devdeployment
-                                              type: K8sManifest
-                                              spec:
-                                                  store:
-                                                      type: Github
-                                                      spec:
-                                                          connectorRef: gitconnector
-                                                          gitFetchType: Branch
-                                                          paths:
-                                                              - deploy/DEV/deployment.yaml
-                                                          branch: feature
-                                                  skipResourceVersioning: false
-                                        - manifest:
-                                              identifier: devvalues
-                                              type: Values
-                                              spec:
-                                                  store:
-                                                      type: Github
-                                                      spec:
-                                                          connectorRef: gitconnector
-                                                          gitFetchType: Branch
-                                                          paths:
-                                                              - deploy/DEV/values.yaml
-                                                          branch: feature
+                                    manifests: []
                         infrastructure:
                             environmentRef: development
                             infrastructureDefinition:
