@@ -282,6 +282,9 @@ pipeline:
                               action:
                                   type: Abort
                     tags: {}
+                    when:
+                        pipelineStatus: Failure
+                        condition: skipBuildStage=no
         - stage:
               name: Request for Approval
               identifier: Request_for_Approval
@@ -307,6 +310,9 @@ pipeline:
                                             - QAApprovers
                                     approverInputs: []
               tags: {}
+              when:
+                  pipelineStatus: Failure
+                  condition: skipBuildStage=no
         - stage:
               name: QA-deployment
               identifier: deploy_to_cluster_qa
@@ -381,6 +387,9 @@ pipeline:
                         action:
                             type: Abort
               variables: []
+              when:
+                  pipelineStatus: Failure
+                  condition: skipBuildStage=no
     properties:
         ci:
             codebase:
