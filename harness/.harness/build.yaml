@@ -152,7 +152,7 @@ pipeline:
                                             type: DockerRegistry
                                     manifests:
                                         - manifest:
-                                              identifier: manifest2
+                                              identifier: devdeployment
                                               type: K8sManifest
                                               spec:
                                                   store:
@@ -165,7 +165,7 @@ pipeline:
                                                           branch: feature
                                                   skipResourceVersioning: false
                                         - manifest:
-                                              identifier: manifest3
+                                              identifier: devvalues
                                               type: Values
                                               spec:
                                                   store:
