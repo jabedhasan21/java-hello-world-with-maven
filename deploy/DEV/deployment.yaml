@@ -4,11 +4,8 @@ metadata:
   name: {{.Values.name}}
 data:
   config.properties: |-
-    devconfigpwd={{.Values.devconfigpwd}}
+    Key={{.Values.Key}}
 {{.Values.env.config.properties | b64dec | indent 4}}
-  dfc.properties: |-
-    devabcpwd={{.Values.devabcpwd}}
-{{.Values.env.config.properties1 | b64dec | indent 4}}
 ---
 apiVersion: apps/v1
 kind: Deployment
