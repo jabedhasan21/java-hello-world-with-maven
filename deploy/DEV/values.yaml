@@ -5,11 +5,11 @@ image: <+artifact.image>
 createNamespace: true
 namespace: <+infra.namespace>
 mountpathname: app
-username: <+pipeline.variables.username>
-password1: <+pipeline.variables.password1>
-constring: <+pipeline.variables.constring>
-Key: <+pipeline.variables.Key>
 env:
   config:
     properties: <+secrets.getValue("config")>
-  secrets: "test"
+  secrets:
+    username: <+pipeline.variables.username>
+    password1: <+pipeline.variables.password1>
+    constring: <+pipeline.variables.constring>
+    Key: <+pipeline.variables.Key>
