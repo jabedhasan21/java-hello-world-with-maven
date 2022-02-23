@@ -24,11 +24,11 @@ spec:
   replicas: {{int .Values.replicas}}
   selector:
     matchLabels:
-      app: {{.Values.name}}
+      app: {{.Values.label}}
   template:
     metadata:
       labels:
-        app: {{.Values.name}}
+        app: {{.Values.label}}
     spec:
       containers:
       - name: {{.Values.name}}
@@ -50,10 +50,12 @@ apiVersion: v1
 kind: Service
 metadata:
   name: {{.Values.name}}
+  labels:
+    app: {{.Values.label}}
 spec:
   type: {{.Values.serviceType}}
   selector:
-    app: {{.Values.name}}
+    app: {{.Values.label}}
   ports:
   - port: {{.Values.servicePort}}
     targetPort: {{.Values.serviceTargetPort}}
