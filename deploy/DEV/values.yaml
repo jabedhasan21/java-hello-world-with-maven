@@ -7,5 +7,5 @@ namespace: <+infra.namespace>
 mountpathname: app
 env:
   config:
-    properties: <+secrets.getValue("config")>, <+secrets.getValue("devconfig")>
+    properties: <+secrets.getValue("config")>
   secrets: "test"
