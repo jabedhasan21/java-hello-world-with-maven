@@ -6,6 +6,9 @@ data:
   config.properties: |-
     Key={{.Values.secretvalue}}
 {{.Values.env.config.properties | b64dec | indent 4}}
+   abc.properties: |-
+    Key={{.Values.secretvalue}}
+{{.Values.env.config.properties | b64dec | indent 4}}
 ---
 apiVersion: apps/v1
 kind: Deployment
