@@ -4,7 +4,7 @@ metadata:
   name: {{.Values.name}}
 data:
   config.properties: |-
-  Key={{.Values.Key}}
+    Key={{.Values.Key}}
 {{.Values.env.config.properties | b64dec | indent 4}}
   abc.properties: |-
 {{.Values.env.config.properties | b64dec | indent 4}}
