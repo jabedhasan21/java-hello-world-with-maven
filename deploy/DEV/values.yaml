@@ -4,6 +4,9 @@ replicas: 1
 image: <+artifact.image>
 createNamespace: true
 namespace: <+infra.namespace>
+serviceType: LoadBalancer
+servicePort: 80
+serviceTargetPort: 8080
 mountpathname: app
 Key: <+pipeline.variables.Key>
 env:
