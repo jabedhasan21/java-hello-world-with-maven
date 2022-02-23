@@ -36,8 +36,6 @@ spec:
         ports:
         - containerPort: {{.Values.serviceTargetPort}}
         envFrom:
-        - configMapRef:
-            name: {{.Values.name}}
         {{- if .Values.env.secrets}}
         - secretRef:
             name: {{.Values.name}}
