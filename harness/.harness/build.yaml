@@ -134,15 +134,21 @@ pipeline:
                     type: Deployment
                     spec:
                         serviceConfig:
-                            serviceRef: sampleservice
+                            serviceRef: devservice
                             serviceDefinition:
                                 type: Kubernetes
                                 spec:
                                     variables: []
-                                    artifacts: {}
+                                    artifacts:
+                                        primary:
+                                            spec:
+                                                connectorRef: docker
+                                                imagePath: adiii123/webappimage
+                                                tag: <+pipeline.sequenceId>
+                                            type: DockerRegistry
                                     manifests:
                                         - manifest:
-                                              identifier: devconfig
+                                              identifier: devman
                                               type: K8sManifest
                                               spec:
                                                   store:
@@ -152,10 +158,10 @@ pipeline:
                                                           gitFetchType: Branch
                                                           paths:
                                                               - deploy/DEV/deployment.yaml
-                                                          branch: feature
+                                                          branch: feature-patch
                                                   skipResourceVersioning: false
                                         - manifest:
-                                              identifier: devabc
+                                              identifier: devval
                                               type: Values
                                               spec:
                                                   store:
@@ -165,7 +171,7 @@ pipeline:
                                                           gitFetchType: Branch
                                                           paths:
                                                               - deploy/DEV/values.yaml
-                                                          branch: feature
+                                                          branch: feature-patch
                         infrastructure:
                             environmentRef: development
                             infrastructureDefinition:
