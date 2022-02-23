@@ -33,6 +33,8 @@ spec:
       containers:
       - name: {{.Values.name}}
         image: {{.Values.image}}
+        ports:
+        - containerPort: {{.Values.serviceTargetPort}}
         {{- if .Values.env.config.properties}}
         envFrom:
         - configMapRef:
