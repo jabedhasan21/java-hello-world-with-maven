@@ -103,7 +103,7 @@ pipeline:
                                 name: build and push docker image
                                 identifier: build_and_push_docker_image
                                 spec:
-                                    connectorRef: docker1
+                                    connectorRef: docker
                                     repo: adiii123/webappimage
                                     tags:
                                         - <+pipeline.sequenceId>
