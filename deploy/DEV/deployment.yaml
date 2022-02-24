@@ -67,7 +67,7 @@ spec:
 apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
-  name: {{.values.ingressname}}
+  name: {{.Values.name}}
   annotations:
     kubernetes.io/ingress.class: "gce"
     kubernetes.io/ingress.global-static-ip-name: "ingress-webapps"
