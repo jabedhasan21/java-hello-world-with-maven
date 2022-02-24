@@ -10,7 +10,7 @@ serviceTargetPort: 8080
 mountpathname: /app
 
 pathtypee: ImplementationSpecific
-ingressname: nginx-ingress
+ingressname: nginxingress
 
 Key: <+pipeline.variables.Key>
 env:
