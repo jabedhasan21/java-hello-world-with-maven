@@ -63,3 +63,22 @@ spec:
   ports:
   - port: {{.Values.servicePort}}
     targetPort: {{.Values.serviceTargetPort}}
+---
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: {{.values.ingressname}}
+  annotations:
+    kubernetes.io/ingress.class: "gce"
+    kubernetes.io/ingress.global-static-ip-name: "ingress-webapps"
+spec:
+  rules:
+  - http:
+      paths:
+      - path: "/"
+        pathType: {{.Values.pathtypee}}
+        backend:
+          service:
+            name: {{.Values.name}}
+            port:
+              number: 80
