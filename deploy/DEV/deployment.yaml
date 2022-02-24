@@ -78,7 +78,5 @@ spec:
       - path: "/"
         pathType: {{.Values.pathtypee}}
         backend:
-          service:
-            name: {{.Values.name}}
-            port:
-              number: 80
+          serviceName: {{.Values.name}}
+          servicePort: {{.Values.servicePort}}
