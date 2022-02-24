@@ -8,6 +8,10 @@ serviceType: LoadBalancer
 servicePort: 80
 serviceTargetPort: 8080
 mountpathname: /app
+
+pathtypee: ImplementationSpecific
+ingress-name: nginx-ingress
+
 Key: <+pipeline.variables.Key>
 env:
   config:
