@@ -144,7 +144,7 @@ pipeline:
                                             spec:
                                                 connectorRef: docker
                                                 imagePath: adiii123/webappimage
-                                                tag: "47"
+                                                tag: "53"
                                             type: DockerRegistry
                                     manifests:
                                         - manifest:
@@ -202,8 +202,7 @@ pipeline:
                                   type: Abort
                     variables: []
                     when:
-                        pipelineStatus: Failure
-                        condition: skipBuildStage=no
+                        pipelineStatus: Success
               - stage:
                     name: TEST-deployment
                     identifier: testdeploy
