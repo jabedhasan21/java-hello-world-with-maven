@@ -110,7 +110,7 @@ pipeline:
                   infrastructure:
                       type: KubernetesDirect
                       spec:
-                          connectorRef: finalgcp
+                          connectorRef: finalgcp1
                           namespace: harness-delegate-ng
                   serviceDependencies:
                       - identifier: depname
@@ -177,8 +177,8 @@ pipeline:
                             infrastructureDefinition:
                                 type: KubernetesDirect
                                 spec:
-                                    connectorRef: finalgcp
-                                    namespace: deploy
+                                    connectorRef: finalgcp1
+                                    namespace: default
                                     releaseName: release-<+trg>
                             allowSimultaneousDeployments: true
                         execution:
