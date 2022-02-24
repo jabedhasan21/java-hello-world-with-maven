@@ -75,7 +75,7 @@ spec:
   rules:
   - http:
       paths:
-      - path: "/"
+      - path: /app
         pathType: {{.Values.pathtypee}}
         backend:
           service:
