@@ -1,0 +1,12 @@
+connector:
+  name: finalgcp1
+  identifier: finalgcp1
+  description:
+  orgIdentifier: default
+  projectIdentifier: sample
+  type: K8sCluster
+  spec:
+    credential:
+      type: InheritFromDelegate
+    delegateSelectors:
+    - finalgcpp
