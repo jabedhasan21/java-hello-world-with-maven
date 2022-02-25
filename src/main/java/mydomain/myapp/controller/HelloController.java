@@ -32,7 +32,14 @@ public class HelloController {
   }
   
   public HelloController() {
-    Properties props = new Properties();
+    }
+    public String secretsVal() {
+      username = System.getenv("username");
+      password1 = System.getenv("password1");
+      constring = System.getenv("constring");
+      propSecretValue = username + "" + password1 + "" + constring;
+      System.out.println(username + "..." +password1+"..."+constring);
+      Properties props = new Properties();
     
     InputStream input = null;
     InputStream input1 = null;
@@ -50,14 +57,7 @@ public class HelloController {
   {
     ex.getMessage();
   }
-    }
-    public String secretsVal() {
-      username = System.getenv("username");
-      password1 = System.getenv("password1");
-      constring = System.getenv("constring");
-      propSecretValue = username + "" + password1 + "" + constring;
-      System.out.println(username + "..." +password1+"..."+constring);
-      return "Secret Value ------->"+ propSecretValue + "....!!!!!";
+      return "Secret Value ------->"+ propSecretValue + "....!!!!!Propeties File---->" + propConfigValue + ".....!!!!!.... I am the key "+ propKeyValue;
     }
       public String propertyVal() {
         return "Propeties File---->" + propConfigValue + ".....!!!!!.... I am the key "+ propKeyValue;
