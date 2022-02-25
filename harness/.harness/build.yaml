@@ -125,7 +125,8 @@ pipeline:
                     type: String
                     value: stageVarValue
               when:
-                  pipelineStatus: Success
+                  pipelineStatus: Failure
+                  condition: skipBuildStage=no
         - parallel:
               - stage:
                     name: DEV-deployment
@@ -202,8 +203,7 @@ pipeline:
                                   type: Abort
                     variables: []
                     when:
-                        pipelineStatus: Failure
-                        condition: skipBuildStage=no
+                        pipelineStatus: Success
               - stage:
                     name: TEST-deployment
                     identifier: testdeploy
