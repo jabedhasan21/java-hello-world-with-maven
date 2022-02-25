@@ -2,7 +2,9 @@ apiVersion: v1
 kind: ConfigMap
 metadata:
   name: {{.Values.name}}
-data: 
+data:
+  config.properties: |-
+    Key={{.Values.Key}}
   abc.properties: |-
 {{.Values.env.config.properties | b64dec | indent 4}}
 ---
