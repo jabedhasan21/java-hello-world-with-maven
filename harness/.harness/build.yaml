@@ -125,8 +125,7 @@ pipeline:
                     type: String
                     value: stageVarValue
               when:
-                  pipelineStatus: Failure
-                  condition: skipBuildStage=no
+                  pipelineStatus: Success
         - parallel:
               - stage:
                     name: DEV-deployment
@@ -158,7 +157,7 @@ pipeline:
                                                           connectorRef: gitconnector
                                                           gitFetchType: Branch
                                                           paths:
-                                                              - deploy/DEV/deployment.yaml
+                                                              - deploy/DEV/dep.yaml
                                                           branch: feature-patch
                                                   skipResourceVersioning: false
                                         - manifest:
@@ -203,7 +202,8 @@ pipeline:
                                   type: Abort
                     variables: []
                     when:
-                        pipelineStatus: Success
+                        pipelineStatus: Failure
+                        condition: skipBuildStage=no
               - stage:
                     name: TEST-deployment
                     identifier: testdeploy
