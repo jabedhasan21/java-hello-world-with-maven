@@ -125,8 +125,7 @@ pipeline:
                     type: String
                     value: stageVarValue
               when:
-                  pipelineStatus: Failure
-                  condition: skipBuildStage=no
+                  pipelineStatus: Success
         - parallel:
               - stage:
                     name: DEV-deployment
