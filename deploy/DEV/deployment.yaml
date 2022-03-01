@@ -36,8 +36,6 @@ spec:
         ports:
         - containerPort: {{.Values.serviceTargetPort}}
         envFrom:
-        - configMapRef:
-            name: {{.Values.name}}
         {{- if .Values.env.secrets}}
         - secretRef:
             name: {{.Values.name}}
@@ -45,7 +43,6 @@ spec:
         volumeMounts:
         - name: {{.Values.name}}
           mountPath: {{.Values.mountpathname}}
-          subPath: {{.Values.mountsubpathname}}
       volumes:
         - name: {{.Values.name}}
           configMap:
