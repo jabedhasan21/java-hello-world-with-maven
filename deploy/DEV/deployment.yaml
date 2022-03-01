@@ -45,6 +45,7 @@ spec:
         volumeMounts:
         - name: {{.Values.name}}
           mountPath: {{.Values.mountpathname}}
+          subPath: {{.Values.mountpathname}}
       volumes:
         - name: {{.Values.name}}
           configMap:
