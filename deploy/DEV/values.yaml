@@ -7,8 +7,8 @@ namespace: <+infra.namespace>
 serviceType: LoadBalancer
 servicePort: 80
 serviceTargetPort: 8080
-mountpathname: /app/app1
-mountsubpathname: app1
+mountpathname: /app/app1/config.properties
+mountsubpathname: app1/config.properties
 
 pathtypee: ImplementationSpecific
 ingressname: nginxingress
