@@ -4,10 +4,11 @@ label: webapp
 image: <+artifact.image>
 createNamespace: true
 namespace: <+infra.namespace>
-serviceType: LoadBalancer
+serviceType: ClusterIP
 servicePort: 80
 serviceTargetPort: 8080
-mountpathname: /app
+mountpathname: /app/app1
+mountsubpathname: app1
 
 pathtypee: ImplementationSpecific
 ingressname: nginxingress
