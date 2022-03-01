@@ -50,17 +50,3 @@ spec:
         - name: {{.Values.name}}
           configMap:
             name: {{.Values.name}}
----
-apiVersion: v1
-kind: Service
-metadata:
-  name: {{.Values.name}}
-  labels:
-    app: {{.Values.label}}
-spec:
-  type: {{.Values.serviceType}}
-  selector:
-    app: {{.Values.label}}
-  ports:
-  - port: {{.Values.servicePort}}
-    targetPort: {{.Values.serviceTargetPort}}
