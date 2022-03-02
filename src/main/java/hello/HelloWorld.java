@@ -11,4 +11,3 @@ public class HelloWorld {
         System.out.println(greeter.sayHello());
     }
 }
-trtvgtevgtgtv
