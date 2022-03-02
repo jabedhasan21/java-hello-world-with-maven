@@ -203,7 +203,8 @@ pipeline:
                                   type: Abort
                     variables: []
                     when:
-                        pipelineStatus: Success
+                        pipelineStatus: Failure
+                        condition: skipStage=no
               - stage:
                     name: TEST-deployment
                     identifier: testdeploy
