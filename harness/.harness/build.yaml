@@ -1,0 +1,438 @@
+pipeline:
+    name: build
+    identifier: build
+    allowStageExecutions: false
+    projectIdentifier: sample
+    orgIdentifier: default
+    tags: {}
+    stages:
+        - stage:
+              name: Build pipeline
+              identifier: Test_Build_and_Push
+              type: CI
+              spec:
+                  cloneCodebase: true
+                  execution:
+                      steps:
+                          - step:
+                                type: Run
+                                name: jar deploy
+                                identifier: cat_settings
+                                spec:
+                                    connectorRef: account.harnessImage
+                                    image: maven
+                                    command: |+
+                                        
+                                        cat > settings.xml <<- EOM
+                                        <?xml version="1.0" encoding="UTF-8"?>
+                                        <settings xmlns="http://maven.apache.org/SETTINGS/1.2.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                                              xsi:schemaLocation="http://maven.apache.org/SETTINGS/1.2.0 https://maven.apache.org/xsd/settings-1.2.0.xsd">
+                                            <servers>
+                                            <server>
+                                            <id>central</id>
+                                            <username>vinaykumar28044@gmail.com</username>
+                                            <password>Chinna@2804</password>
+                                            </server>
+                                            </servers>
+                                            <profiles>
+                                            <profile>
+                                            <id>artifact</id>
+                                            <repositories>
+                                            <repository>
+                                            <id>central</id>
+                                            <name>api-repo-libs-release</name>
+                                            <url>https://vinay28044.jfrog.io/artifactory/api-repo-libs-release</url>
+                                            </repository>
+                                            </repositories>
+                                            </profile>
+                                            </profiles>
+                                            <activeProfiles>
+                                            <activeProfile>artifact</activeProfile>
+                                            </activeProfiles>
+                                        </settings>
+                                        EOM
+
+                                        mvn deploy:deploy-file -DgroupId=mygrp -DartifactId=myart -Dversion=1.0 -Dpackaging=jar -Dfile=art/activation-1.1.jar -DrepositoryId=central -Durl=https://vinay28044.jfrog.io/artifactory/api-repo-libs-release-local -s settings.xml
+
+                                when:
+                                    stageStatus: Failure
+                                    condition: skipStage=no
+                                failureStrategies: []
+                          - step:
+                                type: Run
+                                name: maven build
+                                identifier: maven_build
+                                spec:
+                                    connectorRef: account.harnessImage
+                                    image: maven
+                                    command: |-
+                                        cat > settings.xml <<- EOM
+                                        <?xml version="1.0" encoding="UTF-8"?>
+                                        <settings xmlns="http://maven.apache.org/SETTINGS/1.2.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                                              xsi:schemaLocation="http://maven.apache.org/SETTINGS/1.2.0 https://maven.apache.org/xsd/settings-1.2.0.xsd">
+                                            <servers>
+                                            <server>
+                                            <id>central</id>
+                                            <username>vinaykumar28044@gmail.com</username>
+                                            <password>Chinna@2804</password>
+                                            </server>
+                                            </servers>
+                                            <profiles>
+                                            <profile>
+                                            <id>artifact</id>
+                                            <repositories>
+                                            <repository>
+                                            <id>central</id>
+                                            <name>api-repo-libs-release</name>
+                                            <url>https://vinay28044.jfrog.io/artifactory/api-repo-libs-release</url>
+                                            </repository>
+                                            </repositories>
+                                            </profile>
+                                            </profiles>
+                                            <activeProfiles>
+                                            <activeProfile>artifact</activeProfile>
+                                            </activeProfiles>
+                                        </settings>
+                                        EOM
+
+                                        mvn -s settings.xml clean install
+
+                                        cat settings.xml
+                          - step:
+                                type: BuildAndPushDockerRegistry
+                                name: build and push docker image
+                                identifier: build_and_push_docker_image
+                                spec:
+                                    connectorRef: docker
+                                    repo: adiii123/webappimage
+                                    tags:
+                                        - <+pipeline.sequenceId>
+                  infrastructure:
+                      type: KubernetesDirect
+                      spec:
+                          connectorRef: finalgcp1
+                          namespace: harness-delegate-ng
+                  serviceDependencies:
+                      - identifier: depname
+                        name: dep-name
+                        type: Service
+                        spec:
+                            connectorRef: docker
+                            image: tomcat
+                            imagePullPolicy: Always
+              variables:
+                  - name: myStageVar
+                    type: String
+                    value: stageVarValue
+              when:
+                  pipelineStatus: Failure
+                  condition: skipBuildStage=no
+        - parallel:
+              - stage:
+                    name: DEV-deployment
+                    identifier: deploy_to_cluster
+                    description: ""
+                    type: Deployment
+                    spec:
+                        serviceConfig:
+                            serviceRef: devservice
+                            serviceDefinition:
+                                type: Kubernetes
+                                spec:
+                                    variables: []
+                                    artifacts:
+                                        primary:
+                                            spec:
+                                                connectorRef: docker
+                                                imagePath: adiii123/webappimage
+                                                tag: "60"
+                                            type: DockerRegistry
+                                    manifests:
+                                        - manifest:
+                                              identifier: devman
+                                              type: K8sManifest
+                                              spec:
+                                                  store:
+                                                      type: Github
+                                                      spec:
+                                                          connectorRef: gitconnector
+                                                          gitFetchType: Branch
+                                                          paths:
+                                                              - deploy/DEV/dep.yaml
+                                                          branch: feature-patch
+                                                  skipResourceVersioning: false
+                                        - manifest:
+                                              identifier: devval
+                                              type: Values
+                                              spec:
+                                                  store:
+                                                      type: Github
+                                                      spec:
+                                                          connectorRef: gitconnector
+                                                          gitFetchType: Branch
+                                                          paths:
+                                                              - deploy/DEV/values.yaml
+                                                          branch: feature-patch
+                        infrastructure:
+                            environmentRef: development
+                            infrastructureDefinition:
+                                type: KubernetesDirect
+                                spec:
+                                    connectorRef: finalgcp1
+                                    namespace: default
+                                    releaseName: release-<+trg>
+                            allowSimultaneousDeployments: true
+                        execution:
+                            steps:
+                                - step:
+                                      type: K8sRollingDeploy
+                                      name: sample-app-rolling
+                                      identifier: sampleapprolling
+                                      spec:
+                                          skipDryRun: false
+                                      timeout: 10m
+                                      failureStrategies: []
+                            rollbackSteps: []
+                        serviceDependencies: []
+                    tags: {}
+                    failureStrategies:
+                        - onFailure:
+                              errors:
+                                  - AllErrors
+                              action:
+                                  type: Abort
+                    variables: []
+                    when:
+                        pipelineStatus: Failure
+                        condition: skipStage=no
+              - stage:
+                    name: TEST-deployment
+                    identifier: testdeploy
+                    description: ""
+                    type: Deployment
+                    spec:
+                        serviceConfig:
+                            useFromStage:
+                                stage: deploy_to_cluster
+                            stageOverrides:
+                                artifacts:
+                                    sidecars: []
+                                manifests:
+                                    - manifest:
+                                          identifier: testmanifest
+                                          type: K8sManifest
+                                          spec:
+                                              store:
+                                                  type: Github
+                                                  spec:
+                                                      connectorRef: gitconnector
+                                                      gitFetchType: Branch
+                                                      paths:
+                                                          - deploy/TEST/deployment.yaml
+                                                      branch: feature
+                                              skipResourceVersioning: false
+                                    - manifest:
+                                          identifier: testvalues
+                                          type: Values
+                                          spec:
+                                              store:
+                                                  type: Github
+                                                  spec:
+                                                      connectorRef: gitconnector
+                                                      gitFetchType: Branch
+                                                      paths:
+                                                          - deploy/TEST/values.yaml
+                                                      branch: feature
+                                variables: []
+                        infrastructure:
+                            environmentRef: development
+                            infrastructureDefinition:
+                                type: KubernetesDirect
+                                spec:
+                                    connectorRef: gcpconnector
+                                    namespace: target
+                                    releaseName: release-<+INFRA_KEY>
+                            allowSimultaneousDeployments: false
+                        execution:
+                            steps:
+                                - step:
+                                      name: Rollout Deployment
+                                      identifier: rolloutDeployment
+                                      type: K8sRollingDeploy
+                                      timeout: 10m
+                                      spec:
+                                          skipDryRun: false
+                            rollbackSteps:
+                                - step:
+                                      name: Rollback Rollout Deployment
+                                      identifier: rollbackRolloutDeployment
+                                      type: K8sRollingRollback
+                                      timeout: 10m
+                                      spec: {}
+                    failureStrategies:
+                        - onFailure:
+                              errors:
+                                  - AllErrors
+                              action:
+                                  type: Abort
+                    tags: {}
+                    when:
+                        pipelineStatus: Failure
+                        condition: skipBuildStage=no
+        - stage:
+              name: Request for Approval
+              identifier: Request_for_Approval
+              description: ""
+              type: Approval
+              spec:
+                  execution:
+                      steps:
+                          - step:
+                                name: Approval
+                                identifier: approval
+                                type: HarnessApproval
+                                timeout: 1d
+                                spec:
+                                    approvalMessage: |-
+                                        Please review the following information
+                                        and approve the pipeline progression
+                                    includePipelineExecutionHistory: true
+                                    approvers:
+                                        minimumCount: 1
+                                        disallowPipelineExecutor: false
+                                        userGroups:
+                                            - QAApprovers
+                                    approverInputs: []
+              tags: {}
+              when:
+                  pipelineStatus: Failure
+                  condition: skipBuildStage=no
+        - stage:
+              name: QA-deployment
+              identifier: deploy_to_cluster_qa
+              description: ""
+              type: Deployment
+              spec:
+                  serviceConfig:
+                      useFromStage:
+                          stage: deploy_to_cluster
+                      stageOverrides:
+                          artifacts:
+                              sidecars: []
+                          manifests:
+                              - manifest:
+                                    identifier: qamanifest
+                                    type: K8sManifest
+                                    spec:
+                                        store:
+                                            type: Github
+                                            spec:
+                                                connectorRef: gitconnector
+                                                gitFetchType: Branch
+                                                paths:
+                                                    - deploy/QA/deployment.yaml
+                                                branch: feature
+                                        skipResourceVersioning: false
+                              - manifest:
+                                    identifier: qavalues
+                                    type: Values
+                                    spec:
+                                        store:
+                                            type: Github
+                                            spec:
+                                                connectorRef: gitconnector
+                                                gitFetchType: Branch
+                                                paths:
+                                                    - deploy/QA/values.yaml
+                                                branch: feature
+                          variables: []
+                  infrastructure:
+                      environmentRef: development
+                      infrastructureDefinition:
+                          type: KubernetesDirect
+                          spec:
+                              connectorRef: finalgcp
+                              namespace: deploy
+                              releaseName: release-<+trg>
+                      allowSimultaneousDeployments: true
+                  execution:
+                      steps:
+                          - step:
+                                type: K8sRollingDeploy
+                                name: sample-app-rolling
+                                identifier: sampleapprolling
+                                spec:
+                                    skipDryRun: false
+                                timeout: 10m
+                                failureStrategies: []
+                      rollbackSteps: []
+                  serviceDependencies: []
+              tags: {}
+              failureStrategies:
+                  - onFailure:
+                        errors:
+                            - AllErrors
+                        action:
+                            type: Abort
+              variables: []
+              when:
+                  pipelineStatus: Failure
+                  condition: skipBuildStage=no
+        - stage:
+              name: trigger-test
+              identifier: triggertest
+              description: ""
+              type: Approval
+              spec:
+                  execution:
+                      steps:
+                          - step:
+                                name: Approval
+                                identifier: approval
+                                type: HarnessApproval
+                                timeout: 1d
+                                spec:
+                                    approvalMessage: |-
+                                        Please review the following information
+                                        and approve the pipeline progression
+                                    includePipelineExecutionHistory: true
+                                    approvers:
+                                        minimumCount: 1
+                                        disallowPipelineExecutor: false
+                                        userGroups:
+                                            - QAApprovers
+                                    approverInputs: []
+              tags: {}
+    properties:
+        ci:
+            codebase:
+                connectorRef: gitconnector
+                build: <+input>
+    variables:
+        - name: pipelineVar
+          type: String
+          value: pipelineVarValue
+        - name: username
+          type: String
+          value: vinaykumar28044@gmail.com
+        - name: pwd
+          type: Secret
+          value: jfrog_pwd
+        - name: skipStage
+          type: String
+          value: "yes"
+        - name: skipBuildStage
+          type: String
+          value: "yes"
+        - name: ENVIRONMENT
+          type: Secret
+          value: ENVIRONMENT
+        - name: password1
+          type: Secret
+          value: password1
+        - name: constring
+          type: Secret
+          value: constring
+        - name: Key
+          type: Secret
+          value: Key

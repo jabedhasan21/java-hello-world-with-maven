@@ -1,0 +1,23 @@
+name: dev
+replicas: 1
+label: webapp
+image: <+artifact.image>
+createNamespace: true
+namespace: <+infra.namespace>
+serviceType: ClusterIP
+servicePort: 80
+serviceTargetPort: 8080
+mountpathname: /app/app1/config.properties
+mountsubpathname: app1/config.properties
+
+pathtypee: ImplementationSpecific
+ingressname: nginxingress
+
+Key: <+pipeline.variables.Key>
+env:
+  config:
+    properties: <+secrets.getValue("config")>
+  secrets:
+    username: <+pipeline.variables.username>
+    password1: <+pipeline.variables.password1>
+    constring: <+pipeline.variables.constring>

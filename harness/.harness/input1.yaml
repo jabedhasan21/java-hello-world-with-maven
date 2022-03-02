@@ -1,0 +1,14 @@
+inputSet:
+  identifier: "input1"
+  name: "input1"
+  orgIdentifier: "default"
+  projectIdentifier: "sample"
+  pipeline:
+    identifier: "build"
+    properties:
+      ci:
+        codebase:
+          build:
+            type: "branch"
+            spec:
+              branch: "feature-patch"
