@@ -5,7 +5,7 @@
     <groupId>org.springframework</groupId>
     <artifactId>hellow-world</artifactId>
     <packaging>jar</packaging>
-    <version>0.2.0</version>
+    <version>1</version>
 
     <!-- tag::joda[] -->
      <properties>
