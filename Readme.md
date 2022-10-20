@@ -7,3 +7,4 @@ Its Awesome
 Deep
 intense
 charismatic
+deplomatic
