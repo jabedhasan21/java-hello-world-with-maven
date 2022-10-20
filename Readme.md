@@ -8,3 +8,4 @@ Deep
 intense
 charismatic
 deplomatic
+pasikuthu
