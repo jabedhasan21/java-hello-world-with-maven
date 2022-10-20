@@ -6,3 +6,4 @@ lots more to come
 Its Awesome
 Deep
 intense
+charismatic
