@@ -16,3 +16,4 @@ gumtha
 jamal
 oo la la 
 Hate him
+how dare he
