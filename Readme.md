@@ -10,3 +10,4 @@ charismatic
 deplomatic
 pasikuthu
 fu**** this
+what the fuck
