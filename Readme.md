@@ -12,3 +12,4 @@ pasikuthu
 fu**** this
 what the fuck
 jumtha
+gumtha
