@@ -16,4 +16,4 @@ gumtha
 jamal
 oo la la 
 Hate him
-
+yu r the one i need to forget in my life
