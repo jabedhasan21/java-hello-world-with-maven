@@ -10,3 +10,4 @@ charismatic
 deplomatic
 pasikuthu
 lusu naaye dushy
+dushy oru paithiyo
