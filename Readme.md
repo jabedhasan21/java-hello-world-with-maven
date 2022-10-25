@@ -9,3 +9,4 @@ intense
 charismatic
 deplomatic
 pasikuthu
+lusu naaye dushy
