@@ -9,6 +9,4 @@ intense
 charismatic
 deplomatic
 pasikuthu
-lusu naaye dushy
-dushy oru paithiyo
-I luv u
+fu**** this
