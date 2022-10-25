@@ -15,3 +15,4 @@ jumtha
 gumtha
 jamal
 oo la la 
+Hate him
