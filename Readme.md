@@ -20,3 +20,4 @@ yu r the one i need to forget in my life
 hell with u , u still hurt me 
 hey baby en heart ah vitu pls knjm poriyaa
 may someday en life ah vitu pls konjom poriya
+kkkk
