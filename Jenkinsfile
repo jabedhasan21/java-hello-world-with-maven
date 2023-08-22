@@ -1,20 +1,22 @@
-pipeline{
+pipeline {
     agent any
 
-    tools {
-         maven 'maven'
-         jdk 'java'
-    }
-
-    stages{
-        stage('checkout'){
-            steps{
-                checkout([$class: 'GitSCM', branches: [[name: '*/master']], extensions: [], userRemoteConfigs: [[credentialsId: 'github access', url: 'https://github.com/sreenivas449/java-hello-world-with-maven.git']]])
+    stages {
+        stage('build') {
+            steps {
+                bat "mvn clean"
             }
         }
-        stage('build'){
-            steps{
-               bat 'mvn package'
+        stage('test') {
+            steps {
+                bat "mvn test"
+                echo "Testing Completed"
+            }
+        }
+        stage('deploy') {
+            steps {
+                bat "mvn package"
+                echo "Deployment Completed"
             }
         }
     }
