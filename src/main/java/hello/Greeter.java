@@ -1,7 +1,10 @@
 package hello;
 
+import org.joda.time.LocalTime;
+
 public class Greeter {
     public String sayHello() {
-        return "DevOps Project for AchiStar Technologies";
+        LocalTime currentTime = new LocalTime();
+        return "The current local time is: " + currentTime;
     }
 }
