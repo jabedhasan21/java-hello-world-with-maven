@@ -1,0 +1,203 @@
+1. 
+nmtui
+edit a connection > enter ip, etc > Ok
+activate a connection > ok > back
+set hostname > ok
+ok
+
+ip address
+ping (ip) -> ping 172.25.xx.xx
+
+vim /etc/ssh/sshd_config
+	permitrootlogin yes
+	passwordauthentication yes
+
+systemctl restart sshd
+
+2. 
+yum repolist all
+cd /etc/yum.repos.d
+vim rhelv9.repo
+	[id_baseos]
+	name=Baseos
+	baseurl=http://content.example.com/rhel8.0/x86_64/dvd/BaseOS
+	gpgcheck=0
+	enabled=1
+
+	[id_appstream]
+	name=Appstream
+	baseurl=http://content.example.com/rhel8.0/x86_64/dvd/AppStream
+	gpgcheck=0
+	enabled=1
+	:wq
+
+yum repolist all
+
+
+3. 
+systemctl status httpd
+yum install httpd
+
+vim /etc/httpd/conf/httpd.conf
+	Listen 82
+	:wq
+semanage port -l | grep httpd
+semanage port -a -t http_port_name -p tcp 82
+semanage port -l | grep httpd
+systemctl restart httpd
+systemctl status httpd
+curl http://localhost:82
+
+4. 
+cat /etc/group
+groupadd sysadms
+useradd -G sysadms natasha
+useradd -G sysadms harry
+id natasha
+useradd -s /sbin/nologin sarah
+echo "trootent" | passwd --stdin natasha
+
+5. 
+crontab -e -u natasha
+	*/2 * * * * logger "Ex200 in progress"
+	:wq
+
+systemctl restart crond.service
+crontab -l -u natasha
+
+
+6. 
+mkdir /home/manager
+chgrp sysadms /home/manager
+chmod 2770 /home/manager
+touch /home/manager/abc.txt
+ls -ld /home/manager/abc.txt
+
+
+7. 
+vim /etc/chrony.conf
+	server ip_given iburst
+	:wq
+systemctl restart chronyd.service
+chronyc sources -v
+
+
+11. 
+useradd -u 3456 alex
+echo "troorent" | passwd --stdin alex
+
+
+12. 
+mkdir /root/harry-files
+find / -user harry -exec cp -rvfp {} /root/harry-files \;
+
+
+13. 
+grep "ich" /usr/share/dict/words > /root/lines
+
+
+14. 
+yum install bzip2.x86_64
+tar -cvjf /root/backup.tar.bz2 /usr/local OR
+tar -cvzf /root/backup.tar.gz /usr/local
+
+
+15. 
+vim script.sh
+	#!/bin/bash
+	find /usr/share -size +30K -size -50K > /mnt/freespace/search.txt
+
+mkdir /mnt/freespace
+chmod +x script.sh
+./script.sh
+
+NODE 2
+
+15/16.
+reboot system and open in rescue mode
+line that starts with linux, go to last word and add:
+"rhgb quiet rd.break console=tty0"
+ctrl+x
+
+# mount -o remount,rw /sysroot/
+# chroot /sysroot/
+# passwd --stdin root
+Enter passwd
+# touch /.autorelabel
+# exit
+# exit
+
+16. 
+ip address
+Open workstation & login as serverb: ssh root@ip
+
+yum repolist all
+cd /etc/yum.repos.d
+vim rhelv9.repo
+	[BaseOS]
+	name=Baseos
+	baseurl=http://content.example.com/rhel8.0/x86_64/dvd/BaseOS
+	gpgcheck=0
+	enabled=1
+
+	[AppStream]
+	name=Appstream
+	baseurl=http://content.example.com/rhel8.0/x86_64/dvd/AppStream
+	gpgcheck=0
+	enabled=1
+	
+	Esc
+	:wq
+
+yum repolist all
+cd ..~
+
+
+17. 
+df -Th
+lvextend -L +310M /address/of/lv
+resize2fs /address/of/lv
+df -Th
+
+
+18. 
+lsblk
+fdisk /path/vdb
+
+:n
+:p
+:Enter, Enter
+Enter last Sector: +512M
+:p
+:t
+:Enter partition number
+:Enter hex code for swap partition
+:p
+:w
+
+partprobe
+lsblk
+mkswap /dev/vdb3(partition that we created above)
+free -m
+swapon /dev/vdb3
+free -m
+vim /etc/fstab
+	/dev/vdb3 swap swap defaults 0 0
+	Esc
+	:wq
+
+
+19. 
+
+
+
+
+
+
+
+
+
+
+
+
+
