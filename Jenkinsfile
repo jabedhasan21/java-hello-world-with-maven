@@ -14,7 +14,7 @@ pipeline{
                 script{
                     sh '''
                         docker build -t $IMAGE_NAME .
-                        docker image tag $IMAGE_NAME.$BUILD_ID $IMAGE_NAME.$BUILD_ID
+                        docker image tag $IMAGE_NAME $IMAGE_NAME:$BUILD_ID
                         '''
                     }
             }
@@ -25,7 +25,7 @@ pipeline{
                         withCredentials([string(credentialsId: 'docker_hub_login', variable: 'docker_hub')]) {
                             sh '''
                                 docker login -u sahar449 -p ${docker_hub}
-                                docker push $IMAGE_NAME.$BUILD_ID
+                                docker push $IMAGE_NAME:$BUILD_ID
                              '''
                         }
                     }
