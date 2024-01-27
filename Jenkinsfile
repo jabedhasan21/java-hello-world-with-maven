@@ -1,5 +1,11 @@
 pipeline{
     agent any
+    environment{
+        DOCKERHUB_USERNAME = "sahar449"
+        DOCKERHUB_LOGIN = "docker_hub_login"
+        APP_NAME = "tom"
+        IMAGE_NAME = "${DOCKERHUB_USERNAME}" + "/" + "${APP_NAME}"
+    }
 
     stages{
 
@@ -7,9 +13,8 @@ pipeline{
             steps{
                 script{
                     sh '''
-                        docker build -t $JOB_NAME:v1.$BUILD_ID .
-                        docker image tag $JOB_NAME:v1.$BUILD_ID sahar449/java-app:v1.$BUILD_ID
-                        docker image tag $JOB_NAME:v1.$BUILD_ID sahar449/java-app:latest
+                        docker build -t $IMAGE_NAME .
+                        docker image tag $IMAGE_NAME.$BUILD_ID $IMAGE_NAME.$BUILD_ID
                         '''
                     }
             }
@@ -20,8 +25,7 @@ pipeline{
                         withCredentials([string(credentialsId: 'docker_hub_login', variable: 'docker_hub')]) {
                             sh '''
                                 docker login -u sahar449 -p ${docker_hub}
-                                docker push sahar449/tom:v1.$BUILD_ID
-                                docker push sahar449/tom:latest
+                                docker push $IMAGE_NAME.$BUILD_ID
                              '''
                         }
                     }
