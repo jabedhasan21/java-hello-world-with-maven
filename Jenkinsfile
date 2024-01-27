@@ -31,5 +31,12 @@ pipeline{
                     }
                 }
             }
+        stage('helm'){
+            steps{
+                script{
+                    sh 'helm upgrade --install java-hello --set image.tag="$BUILD_ID" '
+                }
+            }
+        }
     }
 }
