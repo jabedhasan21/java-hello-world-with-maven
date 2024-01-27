@@ -2,13 +2,17 @@ pipeline{
     agent any
 
     stages{
-        
+
         stage('docker'){
-            sh '''
-                    docker build -t $JOB_NAME:v1.$BUILD_ID .
-                    docker image tag $JOB_NAME:v1.$BUILD_ID sahar449/java-app:v1.$BUILD_ID
-                    docker image tag $JOB_NAME:v1.$BUILD_ID sahar449/java-app:latest
-                '''
+            steps{
+                script{
+                    sh '''
+                        docker build -t $JOB_NAME:v1.$BUILD_ID .
+                        docker image tag $JOB_NAME:v1.$BUILD_ID sahar449/java-app:v1.$BUILD_ID
+                        docker image tag $JOB_NAME:v1.$BUILD_ID sahar449/java-app:latest
+                        '''
+                    }
+            }
         }
         stage('docker push to docker-hub'){
             steps{
