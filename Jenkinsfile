@@ -3,7 +3,7 @@ pipeline{
     environment{
         DOCKERHUB_USERNAME = "sahar449"
         DOCKERHUB_LOGIN = "docker_hub_login"
-        APP_NAME = "tom"
+        APP_NAME = "helm_python_app"
         IMAGE_NAME = "${DOCKERHUB_USERNAME}" + "/" + "${APP_NAME}"
     }
 
