@@ -1,8 +1,0 @@
-/target
-dependency-reduced-pom.xml
-
-# Others
-.classpath
-.project
-.settings/
-.vscode

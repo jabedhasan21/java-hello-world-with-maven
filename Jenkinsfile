@@ -1,20 +1,41 @@
 pipeline{
     agent any
-
-    tools {
-         maven 'maven'
-         jdk 'java'
+    environment{
+        DOCKERHUB_USERNAME = "sahar449"
+        DOCKERHUB_LOGIN = "docker_hub_login"
+        APP_NAME = "helm_python_app"
+        IMAGE_NAME = "${DOCKERHUB_USERNAME}" + "/" + "${APP_NAME}"
     }
 
     stages{
-        stage('checkout'){
+
+        stage('docker'){
             steps{
-                checkout([$class: 'GitSCM', branches: [[name: '*/master']], extensions: [], userRemoteConfigs: [[credentialsId: 'github access', url: 'https://github.com/sreenivas449/java-hello-world-with-maven.git']]])
+                script{
+                    sh '''
+                        docker build -t $IMAGE_NAME .
+                        docker image tag $IMAGE_NAME $IMAGE_NAME:$BUILD_ID
+                        '''
+                    }
             }
         }
-        stage('build'){
+        stage('docker push to docker-hub'){
             steps{
-               bat 'mvn package'
+                script{ 
+                        withCredentials([string(credentialsId: 'docker_hub_login', variable: 'docker_hub')]) {
+                            sh '''
+                                docker login -u sahar449 -p ${docker_hub}
+                                docker push $IMAGE_NAME:$BUILD_ID
+                             '''
+                        }
+                    }
+                }
+            }
+        stage('helm'){
+            steps{
+                script{
+                    sh 'helm upgrade tom --install helm --set image.tag="$BUILD_ID" '
+                }
             }
         }
     }
