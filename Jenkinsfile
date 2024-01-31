@@ -34,7 +34,7 @@ pipeline{
         stage('helm'){
             steps{
                 script{
-                    sh 'helm upgrade tom --install java-hello --set image.tag="$BUILD_ID" '
+                    sh 'helm upgrade tom --install helm --set image.tag="$BUILD_ID" '
                 }
             }
         }
