@@ -5,13 +5,13 @@
     <groupId>org.springframework</groupId>
     <artifactId>jb-hello-world-maven</artifactId>
     <packaging>jar</packaging>
-    <version>0.2.0</version>
+    <version>0.2.4</version>
 
     <!-- tag::joda[] -->
      <properties>
            <java.version>1.8</java.version>
-           <maven.compiler.source>1.8</maven.compiler.source>
-           <maven.compiler.target>1.8</maven.compiler.target>
+           <maven.compiler.source>17</maven.compiler.source>
+           <maven.compiler.target>17</maven.compiler.target>
      </properties>
 
       <dependencies>
@@ -20,11 +20,18 @@
                <artifactId>joda-time</artifactId>
                <version>2.2</version>
            </dependency>
+           <dependency>
+               <groupId>junit</groupId>
+               <artifactId>junit</artifactId>
+               <version>4.13.2</version>
+               <scope>test</scope>
+           </dependency>
        </dependencies>
        <!-- end::joda[] -->
-       
+
     <build>
         <plugins>
+
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-shade-plugin</artifactId>
@@ -46,6 +53,30 @@
                     </execution>
                 </executions>
             </plugin>
+
+            <!-- Tambahan Plugin Checkstyle -->
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-checkstyle-plugin</artifactId>
+                <version>3.6.0</version>
+
+                <configuration>
+                    <configLocation>google_checks.xml</configLocation>
+                    <consoleOutput>true</consoleOutput>
+                    <failsOnError>false</failsOnError>
+                </configuration>
+
+            </plugin>
+
         </plugins>
     </build>
+
+    <distributionManagement>
+        <repository>
+          <id>github</id>
+          <name>GitHub Packages</name>
+          <url>https://maven.pkg.github.com/xxivshnv/java-hello-world-with-maven</url>
+        </repository>
+    </distributionManagement>
+
 </project>
